@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
   </head>
-  <body style="background-image: url('assets/PLTGU.jpg')">
+  <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <button
@@ -81,73 +81,98 @@
             </div>
             <div class="mb-4">
               <label class="card-title form-label">Pilih Supplier</label>
-              <select class="form-control" name="supplier" id="supplier">
+              <select
+                onchange="supplierChange(this.value)"
+                class="form-control"
+                name="supplier"
+                id="supplier"
+              >
                 <option value="00" selected hidden>--Pilih Supplier--</option>
               </select>
             </div>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="mb-4">
+              <label class="card-title form-label">Pilih Sumber Tambang</label>
+              <select class="form-control" name="tambang" id="tambang">
+                <option value="00" selected hidden>--Pilih Supplier--</option>
+              </select>
+            </div>
+            <hr />
+            <div class="mb-4">
+              <label class="card-title form-label">TM ARB</label>
+              <input
+                type="number"
+                value="30.00"
+                class="form-control"
+                id="arb"
+                name="arb"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="card-title form-label"
+                >Ash Content ARB Loading</label
+              >
+              <input
+                type="number"
+                value="5.00"
+                class="form-control"
+                id="ash"
+                name="ash"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="card-title form-label">GCV ARB Loading</label>
+              <input
+                type="number"
+                value="4800"
+                class="form-control"
+                id="gcv"
+                name="gcv"
+              />
+            </div>
+            <button
+              type="button"
+              onclick="prediction()"
+              class="btn btn-primary"
+            >
+              Predict
+            </button>
           </form>
         </div>
       </div>
+      <div class="my-4">
+        <h4 class="text-blue">Target: GCV ARB</h4>
+        <table id="table" class="table d-none bg-light">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Suppliers</th>
+              <th scope="col">Sumber Tambang</th>
+              <th scope="col">TM ARB.1</th>
+              <th scope="col">Ash Content ARB.1</th>
+              <th scope="col">GCV ARB.1</th>
+              <th scope="col">Ash Content ARB Prediction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"></th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <script>
-      let daftar_target = [
-        "GCV ARB",
-        "TM ARB",
-        "Ash Content ARB",
-        "VM ADB",
-        "FC ADB",
-        "Total Sulphur ARB",
-        "Total Sulphur DAFB",
-        "C ADB",
-        "H ADB",
-        "N ADB",
-        "O ADB",
-        "HGI",
-        "Slagging",
-        "Fouling",
-        "IDT (Reducing)",
-        "SiO2",
-        "Al2O3",
-        "Fe2O3",
-        "CaO",
-        "MgO",
-        "Na2O",
-        "K2O",
-      ];
-      let daftar_supplier = [
-        "TIE",
-        "ADARO",
-        "PLNBB",
-        "PTBA",
-        "HE",
-        "KII",
-        "PLNBB LRC",
-        "PLNBB MRC",
-        "TIE MRC",
-        "TIE LRC",
-        "GEL",
-        "IGN",
-        "NLN",
-        "SESM",
-        "TBC",
-        "SPC",
-      ];
-      let targetSelect = document.getElementById("target");
-      daftar_target.forEach((data) => {
-        let option = document.createElement("option");
-        option.value = data; // Set nilai option sesuai dengan target
-        option.text = data; // Set teks yang akan ditampilkan dalam option
-        targetSelect.appendChild(option); // Tambahkan option ke dalam select
-      });
-      let supplierSelect = document.getElementById("supplier");
-      daftar_supplier.forEach((data) => {
-        let option = document.createElement("option");
-        option.value = data; // Set nilai option sesuai dengan target
-        option.text = data; // Set teks yang akan ditampilkan dalam option
-        supplierSelect.appendChild(option); // Tambahkan option ke dalam select
-      });
-    </script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
@@ -156,11 +181,6 @@
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
   </body>
