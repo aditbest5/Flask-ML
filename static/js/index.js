@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
   let imageUrl = "static/assets/PLTGU.jpg";
-  console.log(imageUrl);
   document.body.style.backgroundImage = `url(${imageUrl})`;
   document.body.style.backgroundSize = "cover";
 });
@@ -162,6 +161,11 @@ for (supplier in sumber_t) {
   option.text = supplier; // Set teks yang akan ditampilkan dalam option
   supplierSelect.appendChild(option); // Tambahkan option ke dalam select
 }
+function chooseTarget(e) {
+  document.getElementById("target_info").innerText = e;
+  document.getElementById("target_prediction").innerText =
+    e + " " + "prediction";
+}
 let tambangSelect = document.getElementById("tambang");
 function supplierChange(e) {
   let list_tambang = "";
@@ -170,7 +174,90 @@ function supplierChange(e) {
     tambangSelect.innerHTML = list_tambang;
   });
 }
-function prediction() {
-  let table = document.getElementById("table");
-  table.classList.remove("d-none");
+function unhiddenValidation(name) {
+  let validation = document.getElementById("validation-" + name);
+  validation.classList.remove("d-none");
+}
+async function prediction() {
+  let url = "http://127.0.0.1:5000/gcv-predict";
+  let resultTable = document.getElementById("result");
+  let target = document.getElementById("target").value;
+  let sumber = document.getElementById("tambang").value;
+  let supplier = document.getElementById("supplier").value;
+  let arb = document.getElementById("arb").value;
+  let ash = document.getElementById("ash").value;
+  let gcv = document.getElementById("gcv").value;
+  let gcv_predict = 0;
+  let score = 0;
+  let tipe_score = "";
+  if (target == "00") {
+    unhiddenValidation("target");
+  }
+  if (sumber == "00") {
+    unhiddenValidation("tambang");
+  }
+  if (supplier == "00") {
+    unhiddenValidation("supplier");
+  }
+  if (!arb) {
+    unhiddenValidation("arb");
+  }
+  if (!ash) {
+    unhiddenValidation("ash");
+  }
+  if (!gcv) {
+    unhiddenValidation("gcv");
+  } else if (supplier != "00" && sumber != "00" && arb && ash && gcv) {
+    let data = new FormData();
+    data.append("target", target);
+    data.append("sumber", sumber);
+    data.append("supplier", supplier);
+    data.append("arb", arb);
+    data.append("ash", ash);
+    data.append("gcv", gcv);
+    await fetch(url, {
+      method: "POST",
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        gcv_predict = data[0].prediction;
+        if ("r2_score" in data[0]) {
+          score = data[0].r2_score;
+          tipe_score = "R2 Score: ";
+        } else {
+          score = data[0].roc_auc;
+          tipe_score = "ROC AUC: ";
+        }
+      })
+      .catch((error) => {
+        console.error("Terjadi kesalahan:", error);
+      });
+    let table = document.getElementById("table");
+    table.classList.remove("d-none");
+    document.getElementById("score").innerText = tipe_score + score;
+    resultTable.innerHTML =
+      "<tr>" +
+      "<th></th>" +
+      "<th>" +
+      supplier +
+      "</th>" +
+      "<th>" +
+      sumber +
+      "</th>" +
+      "<th>" +
+      arb +
+      "</th>" +
+      "<th>" +
+      ash +
+      "</th>" +
+      "<th>" +
+      gcv +
+      "</th>" +
+      "<th>" +
+      gcv_predict +
+      "</th>" +
+      "</tr>";
+  }
 }
