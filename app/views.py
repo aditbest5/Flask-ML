@@ -9,6 +9,9 @@ import os
 def index():
     return render_template('index.html')
 
+def calculate():
+    return render_template('calculate.html')
+
 def prediction():
     if request.method == "POST":
         target = request.form['target']
