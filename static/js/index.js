@@ -221,7 +221,6 @@ async function prediction() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         gcv_predict = data[0].prediction;
         if ("r2_score" in data[0]) {
           score = data[0].r2_score;

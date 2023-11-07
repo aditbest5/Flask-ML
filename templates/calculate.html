@@ -22,8 +22,7 @@
               class="form-control"
               id="kalori1"
               name="kalori1"
-              placeholder="Masukan nilai kalor pemasok pertama"
-            />
+              placeholder="Masukan nilai kalor pemasok pertama" />
           </div>
           <div class="mb-3">
             <label for="kuantitas1" class="form-label">Kuantitas</label>
@@ -32,8 +31,7 @@
               class="form-control"
               id="kuantitas1"
               name="kuantitas1"
-              placeholder="Masukan kuantitas"
-            />
+              placeholder="Masukan kuantitas" />
           </div>
         </div>
       </div>
@@ -41,7 +39,7 @@
     <div class="col-md-2">
       <div class="mb-3">
         <div class="d-flex flex-row justify-content-center">
-          <label for="exampleFormControlTextarea1" class="form-label"
+          <label for="kalori_target" class="form-label"
             ><h4 class="text-light">Target Kalori</h4></label
           >
         </div>
@@ -50,14 +48,13 @@
             type="number"
             class="form-control"
             style="width: 20em; height: 4em"
-            id="exampleFormControlInput1"
-            placeholder="Masukkan Target Kalori"
-          />
+            id="kalori_target"
+            placeholder="Masukkan Target Kalori" />
         </div>
       </div>
       <div class="mb-3">
         <div class="d-flex flex-row justify-content-center">
-          <label for="exampleFormControlTextarea1" class="form-label"
+          <label for="operator" class="form-label"
             ><h4 class="text-light">Operator</h4></label
           >
         </div>
@@ -66,9 +63,8 @@
             type="text"
             class="form-control"
             style="width: 20em; height: 4em"
-            id="exampleFormControlInput1"
-            placeholder="Masukkan Nama Operator"
-          />
+            id="operator"
+            placeholder="Masukkan Nama Operator" />
         </div>
       </div>
     </div>
@@ -93,8 +89,7 @@
               class="form-control"
               id="kalori2"
               name="kalori2"
-              placeholder="Masukan nilai kalori pemasok kedua"
-            />
+              placeholder="Masukan nilai kalori pemasok kedua" />
           </div>
           <div class="mb-3">
             <label for="kuantitas2" class="form-label">Kuantitas</label>
@@ -103,13 +98,92 @@
               class="form-control"
               id="kuantitas2"
               name="kuantitas2"
-              placeholder="Masukan kuantitas"
-            />
+              placeholder="Masukan kuantitas" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col my-5">
+    <div class="row-md-5 d-flex flex-row justify-content-center mb-5">
+      <div class="card w-50">
+        <div class="card-header bg-warning text-light">Bio Mass</div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label" for="bio_kalori">Nilai Kalori</label>
+            <input
+              type="number"
+              class="form-control"
+              value="1800"
+              id="bio_kalori"
+              name="bio_kalori"
+              placeholder="Masukan nilai kalor pemasok pertama" />
+          </div>
+          <div class="mb-3">
+            <label for="bio_kuantitas" class="form-label">Kuantitas</label>
+            <input
+              type="number"
+              value="300"
+              class="form-control"
+              id="bio_kuantitas"
+              name="bio_kuantitas"
+              placeholder="Masukan kuantitas" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-md-2">
+      <div class="mb-3">
+        <div class="d-flex flex-column align-content-center">
+          <div class="d-flex flex-row justify-content-center">
+            <button
+              type="button"
+              onclick="blendCalories()"
+              class="btn btn-info w-25">
+              Blend
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-md-5 d-flex flex-row justify-content-center mb-5">
+      <div class="card w-50 d-none" id="hasil_kalori">
+        <div class="card-header bg-primary text-light">Hasil Kalori</div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label" for="target_kalori">Target Kalori</label>
+            <input
+              type="number"
+              class="form-control"
+              id="target_kalori"
+              name="target_kalori"
+              placeholder="Masukan nilai kalor pemasok pertama"
+              disabled />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="target_kalori">Nama Operator</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nama_operator"
+              name="nama_operator"
+              placeholder="Masukan nama operator"
+              disabled />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="total_kalori">Nilai Kalori</label>
+            <input
+              type="number"
+              class="form-control"
+              id="total_kalori"
+              name="total_kalori"
+              placeholder="Masukan nilai kalor pemasok pertama" />
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<script src="{{ url_for('static', filename='js/calculate.js') }}"></script>
 
 {% endblock %}
