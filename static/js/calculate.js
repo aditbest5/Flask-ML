@@ -118,7 +118,15 @@ let sumber_t = {
   BEK: ["PT.BHARINTO EKATAMA"],
   SPE: ["PT.SUMBER PANCA ENERGI"],
 };
-
+let bio_persentase = document.getElementById("bio_persentase");
+bio_persentase.value = 2;
+let target_kalori = [];
+function targetKalori(e) {
+  target_kalori.push(parseInt(e));
+  let kuantitas_bio =
+    bio_persentase.value * 0.01 * target_kalori[target_kalori.length - 1];
+  document.getElementById("bio_kuantitas").value = kuantitas_bio;
+}
 let firstSupplier = document.getElementById("pemasok1");
 for (supplier in sumber_t) {
   let supplierOption = document.createElement("option");
@@ -146,6 +154,18 @@ function hitungKalori(
     kalori1 * kuantitas1 + kalori2 * kuantitas2 + kalori3 * kuantitas3;
   let hasilKalori = totalKalori / target_kalori;
   return hasilKalori;
+}
+
+function kaloriPertama(e) {
+  let nilai_target = target_kalori[target_kalori.length - 1];
+  console.log(nilai_target);
+  let kuantiti = nilai_target * e * 0.01;
+  document.getElementById("kuantitas1").value = kuantiti;
+}
+function kaloriKedua(e) {
+  let nilai_target = target_kalori[target_kalori.length - 1];
+  let kuantiti = nilai_target * e * 0.01;
+  document.getElementById("kuantitas2").value = kuantiti;
 }
 function blendCalories() {
   let pemasok1 = document.getElementById("pemasok1").value;

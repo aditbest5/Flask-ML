@@ -16,13 +16,30 @@
             </select>
           </div>
           <div class="mb-3">
-            <label class="form-label" for="kalori1">Nilai Kalori</label>
+            <label for="kalori1" class="form-label">Nilai Kalori</label>
             <input
               type="number"
               class="form-control"
               id="kalori1"
               name="kalori1"
-              placeholder="Masukan nilai kalor pemasok pertama" />
+              placeholder="Masukan nilai kalori pemasok pertama" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="persentase1"
+              >Persentase Kalori</label
+            >
+            <div class="row">
+              <div class="col-md-10">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="persentase1"
+                  onchange="kaloriPertama(this.value)"
+                  name="persentase1"
+                  placeholder="Masukan persentase" />
+              </div>
+              <h4 class="col-md-2">%</h4>
+            </div>
           </div>
           <div class="mb-3">
             <label for="kuantitas1" class="form-label">Kuantitas</label>
@@ -49,6 +66,7 @@
             class="form-control"
             style="width: 20em; height: 4em"
             id="kalori_target"
+            onchange="targetKalori(this.value)"
             placeholder="Masukkan Target Kalori" />
         </div>
       </div>
@@ -92,6 +110,23 @@
               placeholder="Masukan nilai kalori pemasok kedua" />
           </div>
           <div class="mb-3">
+            <label for="persentase2" class="form-label"
+              >Persentase Kalori</label
+            >
+            <div class="row">
+              <div class="col-md-10">
+                <input
+                  type="number"
+                  class="form-control"
+                  onchange="kaloriKedua(this.value)"
+                  id="persentase2"
+                  name="persentase2"
+                  placeholder="Masukan persentase " />
+              </div>
+              <h4 class="col-md-2">%</h4>
+            </div>
+          </div>
+          <div class="mb-3">
             <label for="kuantitas2" class="form-label">Kuantitas</label>
             <input
               type="number"
@@ -120,14 +155,27 @@
               placeholder="Masukan nilai kalor pemasok pertama" />
           </div>
           <div class="mb-3">
+            <label class="form-label" for="bio_kalori">Persentase Kalori</label>
+            <div class="row">
+              <div class="col-md-10">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="bio_persentase"
+                  name="bio_persentase"
+                  placeholder="Masukan persentase bio mass" />
+              </div>
+              <h4 class="col-md-2">%</h4>
+            </div>
+          </div>
+          <div class="mb-3">
             <label for="bio_kuantitas" class="form-label">Kuantitas</label>
             <input
               type="number"
-              value="300"
               class="form-control"
               id="bio_kuantitas"
               name="bio_kuantitas"
-              placeholder="Masukan kuantitas" />
+              placeholder="Masukan kuantitas bio mass " />
           </div>
         </div>
       </div>
