@@ -48,7 +48,8 @@
               class="form-control"
               id="kuantitas1"
               name="kuantitas1"
-              placeholder="Masukan kuantitas" />
+              placeholder="Masukan kuantitas"
+              disabled />
           </div>
         </div>
       </div>
@@ -56,8 +57,8 @@
     <div class="col-md-2">
       <div class="mb-3">
         <div class="d-flex flex-row justify-content-center">
-          <label for="kalori_target" class="form-label"
-            ><h4 class="text-light">Target Kalori</h4></label
+          <label for="kuantitas_target" class="form-label"
+            ><h4 class="text-light">Target Kuantitas</h4></label
           >
         </div>
         <div class="d-flex flex-row justify-content-center">
@@ -65,8 +66,8 @@
             type="number"
             class="form-control"
             style="width: 20em; height: 4em"
-            id="kalori_target"
-            onchange="targetKalori(this.value)"
+            id="kuantitas_target"
+            onchange="targetKuantitas(this.value)"
             placeholder="Masukkan Target Kalori" />
         </div>
       </div>
@@ -133,7 +134,8 @@
               class="form-control"
               id="kuantitas2"
               name="kuantitas2"
-              placeholder="Masukan kuantitas" />
+              placeholder="Masukan kuantitas"
+              disabled />
           </div>
         </div>
       </div>
@@ -175,7 +177,8 @@
               class="form-control"
               id="bio_kuantitas"
               name="bio_kuantitas"
-              placeholder="Masukan kuantitas bio mass " />
+              placeholder="Masukan kuantitas bio mass "
+              disabled />
           </div>
         </div>
       </div>
@@ -199,17 +202,19 @@
         <div class="card-header bg-primary text-light">Hasil Kalori</div>
         <div class="card-body">
           <div class="mb-3">
-            <label class="form-label" for="target_kalori">Target Kalori</label>
+            <label class="form-label" for="target_kuantitas"
+              >Target Kuantitas</label
+            >
             <input
               type="number"
               class="form-control"
-              id="target_kalori"
-              name="target_kalori"
+              id="target_kuantitas"
+              name="target_kuantitas"
               placeholder="Masukan nilai kalor pemasok pertama"
               disabled />
           </div>
           <div class="mb-3">
-            <label class="form-label" for="target_kalori">Nama Operator</label>
+            <label class="form-label" for="nama_operator">Nama Operator</label>
             <input
               type="text"
               class="form-control"

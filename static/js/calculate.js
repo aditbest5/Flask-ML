@@ -120,11 +120,11 @@ let sumber_t = {
 };
 let bio_persentase = document.getElementById("bio_persentase");
 bio_persentase.value = 2;
-let target_kalori = [];
-function targetKalori(e) {
-  target_kalori.push(parseInt(e));
+let target_kuantitas = [];
+function targetKuantitas(e) {
+  target_kuantitas.push(parseInt(e));
   let kuantitas_bio =
-    bio_persentase.value * 0.01 * target_kalori[target_kalori.length - 1];
+    bio_persentase.value * 0.01 * target_kuantitas[target_kuantitas.length - 1];
   document.getElementById("bio_kuantitas").value = kuantitas_bio;
 }
 let firstSupplier = document.getElementById("pemasok1");
@@ -141,53 +141,122 @@ for (supplier in sumber_t) {
   supplierOption.text = supplier; // Set teks yang akan ditampilkan dalam option
   secondSupplier.appendChild(supplierOption);
 }
-function hitungKalori(
+function hitungKuantitas(
   kalori1,
   kalori2,
   kalori3,
   kuantitas1,
   kuantitas2,
   kuantitas3,
-  target_kalori
+  target_kuantitas
 ) {
   let totalKalori =
     kalori1 * kuantitas1 + kalori2 * kuantitas2 + kalori3 * kuantitas3;
-  let hasilKalori = totalKalori / target_kalori;
+  let hasilKalori = totalKalori / target_kuantitas;
   return hasilKalori;
 }
 
 function kaloriPertama(e) {
-  let nilai_target = target_kalori[target_kalori.length - 1];
-  console.log(nilai_target);
-  let kuantiti = nilai_target * e * 0.01;
-  document.getElementById("kuantitas1").value = kuantiti;
+  let nilai_target = target_kuantitas[target_kuantitas.length - 1];
+  if (!nilai_target) {
+    Swal.fire({
+      title: "Warning!",
+      text: "Masukan Target Kuantitas!",
+      icon: "error",
+    });
+  } else {
+    let kuantiti = nilai_target * e * 0.01;
+    document.getElementById("kuantitas1").value = kuantiti;
+  }
 }
+
 function kaloriKedua(e) {
-  let nilai_target = target_kalori[target_kalori.length - 1];
-  let kuantiti = nilai_target * e * 0.01;
-  document.getElementById("kuantitas2").value = kuantiti;
+  let nilai_target = target_kuantitas[target_kuantitas.length - 1];
+  if (!nilai_target) {
+    Swal.fire({
+      title: "Warning!",
+      text: "Masukan Target Kuantitas!",
+      icon: "error",
+    });
+  } else {
+    let kuantiti = nilai_target * e * 0.01;
+    document.getElementById("kuantitas2").value = kuantiti;
+  }
 }
 function blendCalories() {
   let pemasok1 = document.getElementById("pemasok1").value;
   let pemasok2 = document.getElementById("pemasok2").value;
-  let kalori1 = document.getElementById("kalori1").value;
-  let kalori2 = document.getElementById("kalori2").value;
-  let kuantitas1 = document.getElementById("kuantitas1").value;
-  let kuantitas2 = document.getElementById("kuantitas2").value;
-  let bio_kalori = document.getElementById("bio_kalori").value;
-  let bio_kuantitas = document.getElementById("bio_kuantitas").value;
-  let kalori_target = document.getElementById("kalori_target").value;
-  let nama_operator = document.getElementById("operator").value;
-  document.getElementById("target_kalori").value = kalori_target;
-  document.getElementById("nama_operator").value = nama_operator;
-  document.getElementById("total_kalori").value = hitungKalori(
-    kalori1,
-    kalori2,
-    bio_kalori,
-    kuantitas1,
-    kuantitas2,
-    bio_kuantitas,
-    kalori_target
+  let nilai_target = parseFloat(target_kuantitas[target_kuantitas.length - 1]);
+  let kalori1 = parseFloat(document.getElementById("kalori1").value);
+  let kalori2 = parseFloat(document.getElementById("kalori2").value);
+  let kuantitas1 = parseFloat(document.getElementById("kuantitas1").value);
+  let kuantitas2 = parseFloat(document.getElementById("kuantitas2").value);
+  let bio_kalori = parseFloat(document.getElementById("bio_kalori").value);
+  let bio_kuantitas = parseFloat(
+    document.getElementById("bio_kuantitas").value
   );
-  document.getElementById("hasil_kalori").classList.remove("d-none");
+  let kuantitas_target = parseFloat(
+    document.getElementById("kuantitas_target").value
+  );
+  let nama_operator = document.getElementById("operator").value;
+  console.log(kuantitas1 + kuantitas2 + bio_kuantitas);
+  console.log(nilai_target);
+  if (!nilai_target) {
+    Swal.fire({
+      title: "Warning!",
+      text: "Masukan Target Kuantitas!",
+      icon: "error",
+    });
+  }
+  if (!nama_operator) {
+    Swal.fire({
+      title: "Warning!",
+      text: "Masukan Nama Operator!",
+      icon: "error",
+    });
+  }
+  if (!kalori1 && !kalori2) {
+    Swal.fire({
+      title: "Warning!",
+      text: "Masukan kedua nilai kalori!",
+      icon: "error",
+    });
+  }
+  if (kuantitas1 + kuantitas2 + bio_kuantitas > nilai_target) {
+    Swal.fire({
+      title: "Warning!",
+      text: "Kuantitas tidak boleh lebih dari " + nilai_target,
+      icon: "error",
+    });
+  }
+  if (kuantitas1 + kuantitas2 + bio_kuantitas < nilai_target) {
+    Swal.fire({
+      title: "Warning!",
+      text: "Kuantitas kurang dari " + nilai_target,
+      icon: "error",
+    });
+  } else if (
+    kuantitas1 &&
+    kuantitas2 &&
+    bio_kuantitas &&
+    kuantitas_target &&
+    kalori1 &&
+    kalori2 &&
+    bio_kalori
+    // kuantitas1 + kuantitas2 + bio_kuantitas < nilai_target &&
+    // kuantitas1 + kuantitas2 + bio_kuantitas > nilai_target
+  ) {
+    document.getElementById("target_kuantitas").value = kuantitas_target;
+    document.getElementById("nama_operator").value = nama_operator;
+    document.getElementById("total_kalori").value = hitungKuantitas(
+      kalori1,
+      kalori2,
+      bio_kalori,
+      kuantitas1,
+      kuantitas2,
+      bio_kuantitas,
+      kuantitas_target
+    );
+    document.getElementById("hasil_kalori").classList.remove("d-none");
+  }
 }
