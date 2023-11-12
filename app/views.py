@@ -123,3 +123,6 @@ def prediction():
                     data_inf[f'{target} Prediction'] = y_pred_inf[0]
     data_json = json.dumps(data)
     return data_json
+
+def not_found_error(e):
+    return render_template('404NotFound.html'),404

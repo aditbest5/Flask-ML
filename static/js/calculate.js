@@ -199,8 +199,6 @@ function blendCalories() {
     document.getElementById("kuantitas_target").value
   );
   let nama_operator = document.getElementById("operator").value;
-  console.log(kuantitas1 + kuantitas2 + bio_kuantitas);
-  console.log(nilai_target);
   if (!nilai_target) {
     Swal.fire({
       title: "Warning!",
@@ -219,6 +217,13 @@ function blendCalories() {
     Swal.fire({
       title: "Warning!",
       text: "Masukan kedua nilai kalori!",
+      icon: "error",
+    });
+  }
+  if (!kuantitas1 && !kuantitas2) {
+    Swal.fire({
+      title: "Warning!",
+      text: "Masukan kedua kedua nilai kuantitas!",
       icon: "error",
     });
   }
@@ -242,9 +247,9 @@ function blendCalories() {
     kuantitas_target &&
     kalori1 &&
     kalori2 &&
-    bio_kalori
-    // kuantitas1 + kuantitas2 + bio_kuantitas < nilai_target &&
-    // kuantitas1 + kuantitas2 + bio_kuantitas > nilai_target
+    bio_kalori &&
+    nama_operator &&
+    kuantitas1 + kuantitas2 + bio_kuantitas == nilai_target
   ) {
     document.getElementById("target_kuantitas").value = kuantitas_target;
     document.getElementById("nama_operator").value = nama_operator;
