@@ -14,4 +14,4 @@ app.add_url_rule(rule='/blending',endpoint='blending',view_func=views.calculate)
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", debug=True)
