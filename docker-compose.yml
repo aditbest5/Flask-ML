@@ -11,21 +11,6 @@ services:
     networks:
       - mysql-python-app-network
 
-  # nginx service
-  nginx:
-    # The official Nginx Docker from Docker Hub. For building the Nginx container
-    image: nginx:latest
-    volumes:
-      # Volume for the nginx Docker container
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    # The Nginx service depends on the Flask application service (It will link the Flask web application and Nginx Load balancer)
-    depends_on:
-      - app
-    # ports for the Nginx application service
-    ports:
-      # Port for the Nginx load balancer
-      - "80:80"
-
   mysql-flask-app-container:
     image: mysql:8.0.28
     container_name: mysql-flask-app-container
