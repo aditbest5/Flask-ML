@@ -2,7 +2,9 @@ version: "3.8"
 
 services:
   python-flask-app-container:
-    image: sunlight4d/python-flask-app:v1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: python-flask-app-container
     ports:
       - 5002:5000
@@ -10,6 +12,8 @@ services:
       - ./:/app
     networks:
       - mysql-python-app-network
+    depends_on:
+      - mysql-flask-app-container
 
   mysql-flask-app-container:
     image: mysql:8.0.28
