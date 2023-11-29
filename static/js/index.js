@@ -179,7 +179,7 @@ function unhiddenValidation(name) {
   validation.classList.remove("d-none");
 }
 async function prediction() {
-  let url = "http://34.87.13.2/gcv-predict";
+  let url = "http://127.0.0.1:5000/gcv-predict";
   let resultTable = document.getElementById("result");
   let target = document.getElementById("target").value;
   let sumber = document.getElementById("tambang").value;

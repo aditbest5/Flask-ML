@@ -1,8 +1,7 @@
 from flask import Flask, render_template
 from app import views
+
 app = Flask(__name__)
-
-
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('404NotFound.html'), 404
