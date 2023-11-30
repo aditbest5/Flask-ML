@@ -3,18 +3,21 @@ version: "3.8"
 services:
   python-flask-app-container:
     build:
-      context: .
+      context: ./
       dockerfile: Dockerfile
+    image: python-flask-app-image
     container_name: python-flask-app-container
-    ports:
-      - 5002:5000
     volumes:
       - ./:/app
+    ports:
+      - 5000:5000
     networks:
       - mysql-python-app-network
+    depends_on:
+      - mysql-flask-app-container
 
   mysql-flask-app-container:
-    image: mysql:8.0.28
+    image: mysql
     container_name: mysql-flask-app-container
     ports:
       - 3309:3306
@@ -29,6 +32,7 @@ services:
 networks:
   mysql-python-app-network:
     name: mysql-python-app-network
+
 volumes:
   mysql-python-app-volume:
   mysql-python-app-volume-config:
