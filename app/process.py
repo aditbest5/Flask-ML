@@ -44,7 +44,9 @@ def all_sumber():
         "K2O": sumber.SumberTambang.K2O,
         "TiO2": sumber.SumberTambang.TiO2,
         "MnO2": sumber.SumberTambang.MnO2,
-        "P2O5":sumber.SumberTambang.P2O5
+        "P2O5":sumber.SumberTambang.P2O5,
+        "Slagging":sumber.SumberTambang.Slagging,
+        "Fouling":sumber.SumberTambang.Fouling
         } for sumber in search_result]
 
     return sumber_list

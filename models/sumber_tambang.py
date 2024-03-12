@@ -1,6 +1,13 @@
-from sqlalchemy import Column, Integer, String, Date, SmallInteger,Float,ForeignKey
+from sqlalchemy import Column, Integer, String, Date, SmallInteger,Float,ForeignKey,Enum
 from .database import Base
+from enum import Enum as UserEnum
+class SlaggingEnum(UserEnum):
+    LOW = "LOW"
+    MEDIUM = "MEDIUM"
 
+class FoulingEnum(UserEnum):
+    LOW = "LOW"
+    MEDIUM = "MEDIUM"
 class SumberTambang(Base):
     __tablename__ = 'tbl_sumber_tambang'
     id = Column(Integer, primary_key =  True)
@@ -22,5 +29,7 @@ class SumberTambang(Base):
     TiO2 = Column(Float)
     MnO2 = Column(Float)
     P2O5 = Column(Float)
+    Slagging = Column(String)
+    Fouling = Column(String)
 
 
