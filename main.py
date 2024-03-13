@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template,jsonify
 from app import views, process
 
 app = Flask(__name__)
@@ -12,10 +12,10 @@ app.add_url_rule(rule='/blending',endpoint='blending',view_func=views.calculate)
 def show_suppliers():
     result = process.all_suppliers()
     return result
-@app.route('/get-sumber', methods=['GET'])
-def show_sumber():
-    result = process.all_sumber()
-    return result
+@app.route('/get-sumber/<int:id>', methods=['GET'])
+def show_sumber(id):
+    result = process.get_sumber_by_id(id)
+    return jsonify(result)
 
 
 if __name__ == "__main__":

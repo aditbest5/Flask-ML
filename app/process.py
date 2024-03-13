@@ -18,35 +18,25 @@ session = Database()
 def all_suppliers():
     search_result = session.query(Suppliers).all()
     suppliers_list = [{"id": supplier.id, "Suppliers": supplier.Suppliers} for supplier in search_result]
-
     return suppliers_list
 
-def all_sumber():
-    search_result = session.query(SumberTambang, Suppliers).join(Suppliers, SumberTambang.id_supplier == Suppliers.id).all()
+def get_sumber_by_id(id):
+    search_results = session.query(SumberTambang, Suppliers).join(Suppliers, SumberTambang.id_supplier == Suppliers.id).filter(Suppliers.id == id).all()
 
-    sumber_list = [{
-        "id": sumber.SumberTambang.id, 
-        "Sumber_Tambang": sumber.SumberTambang.Sumber_Tambang,
-        "id_supplier": sumber.SumberTambang.id_supplier,
-        "Suppliers": sumber.Suppliers.Suppliers,
-        "GCV_ARB":sumber.SumberTambang.GCV_ARB,
-        "Total_Sulphur_ARB": sumber.SumberTambang.Total_Sulphur_ARB, 
-        "Total_Sulphur_DAFB":sumber.SumberTambang.Total_Sulphur_DAFB,
-        "Ash_Content_ARB":sumber.SumberTambang.Ash_Content_ARB,
-        "Ash_Content_ADB": sumber.SumberTambang.Ash_Content_ADB,
-        "TM_ARB":sumber.SumberTambang.TM_ARB,
-        "IM_ADB":sumber.SumberTambang.IM_ADB,
-        "IDT":sumber.SumberTambang.IDT,
-        "SiO2":sumber.SumberTambang.SiO2,
-        "Al2O3":sumber.SumberTambang.Al2O3,
-        "Fe2O3":sumber.SumberTambang.Fe2O3,
-        "Na2O": sumber.SumberTambang.Na2O,
-        "K2O": sumber.SumberTambang.K2O,
-        "TiO2": sumber.SumberTambang.TiO2,
-        "MnO2": sumber.SumberTambang.MnO2,
-        "P2O5":sumber.SumberTambang.P2O5,
-        "Slagging":sumber.SumberTambang.Slagging,
-        "Fouling":sumber.SumberTambang.Fouling
-        } for sumber in search_result]
+    if not search_results:
+        return None
 
-    return sumber_list
+    all_results = []
+
+    for sumber_tambang, supplier in search_results:
+        sumber_tambang_dict = sumber_tambang.__dict__
+        supplier_dict = supplier.__dict__
+
+        sumber_tambang_dict = {key: value for key, value in sumber_tambang_dict.items() if not key.startswith('_')}
+        supplier_dict = {key: value for key, value in supplier_dict.items() if not key.startswith('_')}
+
+        result_dict = {**sumber_tambang_dict, **supplier_dict}
+
+        all_results.append(result_dict)
+
+    return all_results
