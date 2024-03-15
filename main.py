@@ -17,6 +17,11 @@ def show_sumber(id):
     result = process.get_sumber_by_id(id)
     return jsonify(result)
 
+@app.route('/get-coal-yard', methods=['GET'])
+def show_coal_yard():
+    result = process.get_coal_yard()
+    return jsonify(result)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)

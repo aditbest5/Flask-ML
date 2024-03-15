@@ -60,7 +60,7 @@
     <div class="col-md-2">
       <div class="mb-3">
         <div class="d-flex flex-row justify-content-center">
-          <label for="kalori_target" class="form-label"
+          <label for="target_kalori" class="form-label"
             ><h4 class="text-light">Target Kalori</h4></label
           >
         </div>
@@ -69,8 +69,7 @@
             type="number"
             class="form-control"
             style="width: 20em; height: 4em"
-            id="kuantitas_target"
-            onchange="targetKalori(this.value)"
+            id="target_kalori"
             placeholder="Masukkan Target Kalori"
           />
         </div>
@@ -253,5 +252,5 @@
   </div>
 </div>
 <script src="{{ url_for('static', filename='js/calculate.js') }}"></script>
-
+<script src="{{ url_for('static', filename='js/blending.js') }}"></script>
 {% endblock %}

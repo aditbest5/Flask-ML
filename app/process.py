@@ -40,3 +40,22 @@ def get_sumber_by_id(id):
         all_results.append(result_dict)
 
     return all_results
+
+def coal_yard_to_dict(coal_yard):
+    coal_yard_dict = coal_yard.__dict__
+    coal_yard_dict = {key: value for key, value in coal_yard_dict.items() if not key.startswith('_')}
+    return coal_yard_dict
+
+def get_coal_yard():
+    search_results = session.query(CoalYard).all()
+
+    if not search_results:
+        return None
+
+    all_results = []
+
+    for coal_yard in search_results:
+        coal_yard_dict = coal_yard_to_dict(coal_yard)
+        all_results.append(coal_yard_dict)
+
+    return all_results
