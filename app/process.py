@@ -47,7 +47,7 @@ def coal_yard_to_dict(coal_yard):
     return coal_yard_dict
 
 def get_coal_yard():
-    search_results = session.query(CoalYard).all()
+    search_results = session.query(CoalYard).order_by(CoalYard.AREA.asc(), CoalYard.LAYER.asc()).all()
 
     if not search_results:
         return None
@@ -57,5 +57,43 @@ def get_coal_yard():
     for coal_yard in search_results:
         coal_yard_dict = coal_yard_to_dict(coal_yard)
         all_results.append(coal_yard_dict)
+
+    return all_results
+
+def get_supplier_by_id(id1, id2):
+    # Query untuk ID pertama
+    search_results1 = session.query(SumberTambang, Suppliers).join(Suppliers, SumberTambang.id_supplier == Suppliers.id).filter(SumberTambang.id == id1).all()
+    
+    # Query untuk ID kedua
+    search_results2 = session.query(SumberTambang, Suppliers).join(Suppliers, SumberTambang.id_supplier == Suppliers.id).filter(SumberTambang.id == id2).all()
+
+    if not search_results1 and not search_results2:
+        return None
+
+    all_results = []
+
+    # Mengubah hasil query ID pertama menjadi bentuk yang dapat diolah
+    for sumber_tambang, supplier in search_results1:
+        sumber_tambang_dict = sumber_tambang.__dict__
+        supplier_dict = supplier.__dict__
+
+        sumber_tambang_dict = {key: value for key, value in sumber_tambang_dict.items() if not key.startswith('_')}
+        supplier_dict = {key: value for key, value in supplier_dict.items() if not key.startswith('_')}
+
+        result_dict = {**sumber_tambang_dict, **supplier_dict}
+
+        all_results.append(result_dict)
+
+    # Mengubah hasil query ID kedua menjadi bentuk yang dapat diolah
+    for sumber_tambang, supplier in search_results2:
+        sumber_tambang_dict = sumber_tambang.__dict__
+        supplier_dict = supplier.__dict__
+
+        sumber_tambang_dict = {key: value for key, value in sumber_tambang_dict.items() if not key.startswith('_')}
+        supplier_dict = {key: value for key, value in supplier_dict.items() if not key.startswith('_')}
+
+        result_dict = {**sumber_tambang_dict, **supplier_dict}
+
+        all_results.append(result_dict)
 
     return all_results
