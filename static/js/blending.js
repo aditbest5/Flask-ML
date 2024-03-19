@@ -53,6 +53,10 @@ async function blendCalories() {
       let found = false;
       let id_tambangA = null;
       let id_tambangB = null;
+      let kaloriBio = document.getElementById("bio_kalori").value;
+      let volumeBio = parseFloat(
+        document.getElementById("bio_kuantitas").value
+      );
       for (let i = 0; i < coalYardData.length; i++) {
         const sumberTambangA = coalYardData[i];
         kaloriA = sumberTambangA.CALORIE;
@@ -64,11 +68,12 @@ async function blendCalories() {
           volumeB = parseFloat(sumberTambangB.VOLUME_LOAD.replace(/,/g, ""));
 
           // Hitung total volume A dan B
-          const totalVolume = volumeA + volumeB;
+          const totalVolume = volumeA + volumeB + volumeBio;
 
           // Hitung target kalori
           const targetKalori =
-            (kaloriA * volumeA + kaloriB * volumeB) / totalVolume;
+            (kaloriA * volumeA + kaloriB * volumeB + kaloriBio * volumeBio) /
+            totalVolume;
 
           // Jika target kalori mendekati target_kalori, simpan pasangan sumber tambang dan hentikan iterasi
           if (Math.abs(targetKalori - target_kalori) < 100) {
@@ -107,6 +112,13 @@ async function blendCalories() {
           document.getElementById("kalori2").value = kaloriB;
           document.getElementById("kuantitas1").value = volumeA;
           document.getElementById("kuantitas2").value = volumeB;
+          document.getElementById("hasil_kalori").classList.remove("d-none");
+          document.getElementById("hasil_target_kalori").value =
+            selectedCoalYard.targetKalori;
+          document.getElementById("nama_operator").value =
+            document.getElementById("operator").value;
+          document.getElementById("total_kuantitas").value =
+            selectedCoalYard.totalVolume;
           break;
         }
       }

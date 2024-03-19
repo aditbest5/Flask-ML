@@ -97,3 +97,6 @@ def get_supplier_by_id(id1, id2):
         all_results.append(result_dict)
 
     return all_results
+
+def post_blending_result():
+    result = []

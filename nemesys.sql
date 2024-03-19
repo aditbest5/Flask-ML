@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2024 at 09:31 AM
+-- Generation Time: Mar 19, 2024 at 09:47 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -89,6 +89,26 @@ INSERT INTO `tbl_coal_yard` (`id`, `OUTBAR_ID`, `ORG_ID_SUPPLIER`, `id_sumber_ta
 (18, 'OB202310312126', '20BAS', 32, 'VSL1346', 'BG. Cakrawala VIII 2022', 4902, 4902, '      10,131.000', '10/29/2023 6:00', 4535, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,017.000', 'ARA0003', 'Coal Yard B', 'LOC0029', 'Y9', 'LYR0065', 'L3', '10/31/2023', 24.4, 'Coal Yard B - Y9 - (      12,069.000) Ton', '', '', '', 'STCK202310302109', 3, '       3,100.000', '       2,917.000', 0, '10/31/2023'),
 (19, 'OB202311172201', '20BAS', 32, 'VSL0341', 'BG. Kapuas Jaya 333', 4908, 4908, '      11,519.000', '11/14/2023 16:00', 4613, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       7,425.000', 'ARA0003', 'Coal Yard B', 'LOC0029', 'Y9', 'LYR0066', 'L4', '11/17/2023', 7.4, 'Coal Yard B - Y9 - (      12,069.000) Ton', '', '', '', 'STCK202311072159', 4, '550,000', '       5,958.000', 0, '11/16/2023'),
 (20, 'OB202308021499', '20ADR', 1, 'VSL0889', 'MV. Arimbi Baruna', 4800, 4800, '      63,000.000', '7/22/2023 11:00', 4647, '24SRY', 'SRY', 'PLTU SURALAYA', 'STACKING', '      25,703.000', 'ARA0185', 'Coal Yard C', 'LOC0227', 'C2', 'LYR0244', 'L1', '8/3/2023', 113.4, 'Coal Yard C - C2 - (      25,703.000) Ton', '', '', '', 'STCK202308031512', 1, '', '', 0, '7/22/2023');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_history`
+--
+
+CREATE TABLE `tbl_history` (
+  `id` int(11) NOT NULL,
+  `supplier1_calorie` varchar(30) NOT NULL,
+  `supplier2_calorie` varchar(30) NOT NULL,
+  `supplier1_volume` int(11) NOT NULL,
+  `supplier2_volume` int(11) NOT NULL,
+  `biomass_calorie` int(11) NOT NULL,
+  `biomass_volume` int(11) NOT NULL,
+  `id_supplier1` int(11) NOT NULL,
+  `id_supplier2` int(11) NOT NULL,
+  `operator` varchar(30) NOT NULL,
+  `target_kalori` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -286,6 +306,14 @@ ALTER TABLE `tbl_coal_yard`
   ADD KEY `fk_supplier_sumber_tambang` (`id_sumber_tambang`);
 
 --
+-- Indexes for table `tbl_history`
+--
+ALTER TABLE `tbl_history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_supplier1_id` (`id_supplier1`),
+  ADD KEY `fk_supplier2_id` (`id_supplier2`);
+
+--
 -- Indexes for table `tbl_sumber_tambang`
 --
 ALTER TABLE `tbl_sumber_tambang`
@@ -309,6 +337,12 @@ ALTER TABLE `tbl_coal_yard`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT for table `tbl_history`
+--
+ALTER TABLE `tbl_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tbl_sumber_tambang`
 --
 ALTER TABLE `tbl_sumber_tambang`
@@ -329,6 +363,13 @@ ALTER TABLE `tbl_suppliers`
 --
 ALTER TABLE `tbl_coal_yard`
   ADD CONSTRAINT `fk_supplier_sumber_tambang` FOREIGN KEY (`id_sumber_tambang`) REFERENCES `tbl_sumber_tambang` (`id`);
+
+--
+-- Constraints for table `tbl_history`
+--
+ALTER TABLE `tbl_history`
+  ADD CONSTRAINT `fk_supplier1_id` FOREIGN KEY (`id_supplier1`) REFERENCES `tbl_suppliers` (`id`),
+  ADD CONSTRAINT `fk_supplier2_id` FOREIGN KEY (`id_supplier2`) REFERENCES `tbl_suppliers` (`id`);
 
 --
 -- Constraints for table `tbl_sumber_tambang`
