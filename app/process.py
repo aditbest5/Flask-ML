@@ -1,8 +1,10 @@
 ## import module
+from flask import request
 from models.coal_yard import *
 from models.sumber_tambang import *
 from models.suppliers import *
 from models.database import *
+from models.history import *
 from datetime import datetime, timedelta
 from dotenv import dotenv_values
 
@@ -98,5 +100,31 @@ def get_supplier_by_id(id1, id2):
 
     return all_results
 
-def post_blending_result():
-    result = []
+def post_blending_result(data):
+    try:
+        volumeA = data.get('volumeA')
+        volumeB = data.get('volumeB')
+        kaloriA = data.get('kaloriA')
+        kaloriB = data.get('kaloriB')
+        id_tambangA = data.get('id_tambangA')
+        id_tambangB = data.get('id_tambangB')
+        kaloriBio = data.get('kaloriBio')
+        volumeBio = data.get('volumeBio')
+        nama_operator = data.get('nama_operator')
+        target_kalori = data.get('target_kalori')
+        body = {
+            "supplier1_volume":int(volumeA),
+            "supplier2_volume":int(volumeB),
+            "supplier1_calorie":int(kaloriA),
+            "supplier2_calorie":int(kaloriB),
+            "id_supplier1":int(id_tambangA),
+            "id_supplier2":int(id_tambangB),
+            "biomass_volume":int(volumeBio),
+            "biomass_calorie":int(kaloriBio),
+            "operator":nama_operator,
+            "target_kalori":float(target_kalori)}
+        session.add(History(**body))
+        session.commit()
+        return {'success': True, 'message': 'Data berhasil disimpan ke dalam tabel history'}
+    except Exception as e:
+        return {'success': False, 'message': str(e)}

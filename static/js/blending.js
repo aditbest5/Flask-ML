@@ -36,7 +36,8 @@ async function renderSupplier() {
 renderSupplier();
 
 async function blendCalories() {
-  if (document.getElementById("operator").value) {
+  let nama_operator = document.getElementById("operator").value;
+  if (nama_operator) {
     try {
       const coalYardData = await fetch(
         "http://127.0.0.1:5000/get-coal-yard"
@@ -102,7 +103,6 @@ async function blendCalories() {
         if (found) {
           id_tambangA = selectedCoalYard.sumberTambangA.id_sumber_tambang;
           id_tambangB = selectedCoalYard.sumberTambangB.id_sumber_tambang;
-
           const supplierData = await fetch(
             `http://127.0.0.1:5000/get-supplier-by-id/${id_tambangA}&${id_tambangB}`
           ).then((response) => response.json());
@@ -115,10 +115,32 @@ async function blendCalories() {
           document.getElementById("hasil_kalori").classList.remove("d-none");
           document.getElementById("hasil_target_kalori").value =
             selectedCoalYard.targetKalori;
-          document.getElementById("nama_operator").value =
-            document.getElementById("operator").value;
+          document.getElementById("nama_operator").value = nama_operator;
           document.getElementById("total_kuantitas").value =
             selectedCoalYard.totalVolume;
+          await fetch("http://127.0.0.1:5000/store-history", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              volumeA: volumeA,
+              volumeB: volumeB,
+              kaloriA: kaloriA,
+              kaloriB: kaloriB,
+              id_tambangA: id_tambangA,
+              id_tambangB: id_tambangB,
+              kaloriBio: kaloriBio,
+              volumeBio: volumeBio,
+              nama_operator: nama_operator,
+              target_kalori: selectedCoalYard.targetKalori,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((err) => console.log(err.message));
           break;
         }
       }
