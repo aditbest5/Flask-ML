@@ -124,5 +124,10 @@ def prediction():
     data_json = json.dumps(data)
     return data_json
 
+def explore():
+    df = pd.read_excel("tes1234.xlsx", skiprows=range(4), header=0, usecols=['Periode', 'Shipment', 'Suppliers', 'Sumber Tambang', 'GCV\nARB', 'TM\nARB', 'Ash \nContent\nARB', 'VM\nADB', 'FC\nADB', 'Total Sulphur\nARB'])
+    # pd.set_option('display.max_columns', None)
+    return render_template('explore.html', data=df.to_html())
+
 def not_found_error(e):
     return render_template('404NotFound.html'),404

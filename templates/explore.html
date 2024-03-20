@@ -1,0 +1,115 @@
+{% extends "master.html" %}
+
+{% block bodyblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT PLN Indonesia Power</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon.ico ') }}" type="image/x-icon" /> -->
+    <style>
+        .table-container {
+            width: 90%; /* Sesuaikan dengan lebar yang Anda inginkan */
+            margin: 0 auto; /* Untuk meletakkan div di tengah halaman */
+            white-space: nowrap;
+            overflow-x: auto; /* Aktifkan scrollbar horizontal bila diperlukan */
+            overflow-y: auto; /* Aktifkan scrollbar vertikal bila diperlukan */
+            max-height: 300px; /* Atur tinggi maksimum div */
+            background-color: white; /* Atur warna latar belakang tabel */
+            border: 1px solid #dee2e6; /* Atur garis tepi tabel */
+            border-radius: 5px; /* Atur sudut bulat untuk tepi tabel */
+            padding: 10px; /* Atur padding untuk isi tabel */
+        }
+    </style>
+</head>
+<body>
+    <!-- Isi halaman -->
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <h5 class="card-header bg-info">Explore</h5>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <!-- Tabel Anda akan diletakkan di sini -->
+                            {{ data | safe }}
+                        </div>
+                    </div>
+                </div>
+                <form>
+                    <div class="mb-4">
+                        <label class="card-title form-label"><h6>Pilih Supplier:</h6></label>
+                        <select
+                            onchange="chooseSupplier(this.value)"
+                            class="form-control"
+                            name="supplier"
+                            id="supplier">
+                            <option value="00" selected hidden>--Pilih Supplier--</option>
+                            <option value="TIE">TIE</option>
+                            <option value="ADARO">ADARO</option>
+                            <option value="PLNBB">PLNBB</option>
+                            <option value="PTBA">PTBA</option>
+                            <option value="HE">HE</option>
+                            <option value="KII">KII</option>
+                            <option value="PLNBB MRC">PLNBB MRC</option>
+                            <option value="TIE MRC">TIE MRC</option>
+                            <option value="TIE LRC">TIE LRC</option>
+                            <option value="GEL">GEL</option>
+                            <option value="IGN">IGN</option>
+                            <option value="NLN">NLN</option>
+                            <option value="SESM">SESM</option>
+                            <option value="TBC">TBC</option>
+                            <option value="SPC">SPC</option>
+                            <option value="MME">MME</option>
+                            <option value="MIP">MIP</option>
+                            <option value="MANDIRI">MANDIRI</option>
+                            <option value="BSR">BSR</option>
+                            <option value="BGG">BGG</option>
+                            <option value="BP">BP</option>
+                            <option value="AI">AI</option>
+                            <option value="ARA">ARA</option>
+                            <option value="KJA">KJA</option>
+                            <option value="TBR">TBR</option>
+                            <option value="PLNBB NIAGA">PLNBB NIAGA</option>
+                            <option value="SDJ">SDJ</option>
+                            <option value="DP">DP</option>
+                            <option value="BEK">BEK</option>
+                            <option value="SPE">SPE</option>
+                        </select>
+                        <div
+                            id="validation-supplier"
+                            class="alert alert-danger d-flex align-items-center d-none"
+                            role="alert">
+                            <div>Please select supplier</div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="card-title form-label"><h6>Pilih Target:</h6></label>
+                        <select
+                            onchange="chooseTarget(this.value)"
+                            class="form-control"
+                            name="target"
+                            id="target">
+                            <option value="00" selected hidden>--Pilih Target--</option>
+                            <option value="GCV ARB">GCV ARB</option>
+                            <option value="TM ARB">TM ARB</option>
+                            <option value="Ash Content ARB">Ash Content ARB</option>
+                        </select>
+                        <div
+                            id="validation-target"
+                            class="alert alert-danger d-flex align-items-center d-none"
+                            role="alert">
+                            <div>Please select target</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="{{ url_for('static', filename='js/explore.js') }}"></script>
+{% endblock %}

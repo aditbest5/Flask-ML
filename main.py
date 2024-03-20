@@ -9,7 +9,7 @@ def not_found_error(error):
 app.add_url_rule(rule='/',endpoint='index',view_func=views.index)
 app.add_url_rule(rule='/gcv-predict',endpoint='predict',view_func=views.prediction, methods=['POST'])
 app.add_url_rule(rule='/blending',endpoint='blending',view_func=views.calculate)
-
+app.add_url_rule(rule='/explore',endpoint='explore',view_func=views.explore)
 
 
 
