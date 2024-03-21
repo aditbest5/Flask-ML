@@ -4,6 +4,54 @@ document.addEventListener("DOMContentLoaded", function () {
   document.body.style.backgroundSize = "cover";
 });
 
+async function renderSupplier() {
+  let supplierSelect = document.getElementById("supplier");
+  await fetch("http://127.0.0.1:5000/get-supplier", {
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((supplierObj) => {
+        let option = document.createElement("option");
+        option.value = supplierObj.id + "+" + supplierObj.Suppliers;
+        option.text = supplierObj.Suppliers;
+        supplierSelect.appendChild(option);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+renderSupplier();
+async function supplierChange(e) {
+  console.log(e);
+  let sumberSelect = document.getElementById("tambang");
+  sumberSelect.innerHTML = "";
+  let split_value = e.split("+");
+  let id = split_value[0];
+  await fetch(`http://127.0.0.1:5000/get-sumber/${id}`, {
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((sumberObj) => {
+        console.log(sumberObj);
+        let option = document.createElement("option");
+        option.value = sumberObj.id + "+" + sumberObj.Sumber_Tambang;
+        option.text = sumberObj.Sumber_Tambang;
+        sumberSelect.appendChild(option);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 let daftar_target = [
   "GCV ARB",
   "TM ARB",
@@ -32,121 +80,121 @@ let daftar_target = [
   "MnO2",
   "P2O5",
 ];
-let sumber_t = {
-  TIE: [
-    "PT.FIRMAN KETAUN",
-    "PT.TENDRI DHARMA SAMUDRA",
-    "PT.BARA ANUGERAH SEJAHTERA",
-    "PT.GLOBAL ANTAR NUSANTARA LINES",
-    "PT.SAMUDRA SARANA FLORESMA",
-    "PT.GEMA MUTIARA MARINA",
-    "PT.BUMI CENDANA ABADI",
-    "PT.SEA ASIH LINE",
-    "PT.SWADAYA WIRA MARITIM",
-    "PT.LAUTAN JATA MANGGALA",
-    "PT.BAHARI SANDI PRATAMA",
-    "PT.LAUTAN JAYA MANGGALA",
-  ],
-  ADARO: ["PT.ADARO INDONESIA"],
-  PLNBB: [
-    "PT.BASKARA SINAR SAKTI",
-    "PT.USAHA MAJU MAKMUR",
-    "PT.SUMBER REZEKI SAMUDRA JAYA",
-    "PT.PLN BATUBARA",
-    "PT.KREASI ENERGI ALAM",
-    "PT.ARUTMIN INDONESIA",
-    "PT.BUMI CENDANA ABADI",
-    "PT.TENDRI DHARMA SAMUDRA",
-    "PT.TIGA DAYA ENERGI",
-    "PT.BORNEO INDOBARA",
-    "PT.SWADAYA WIRA MARITIM",
-    "PT.BARATABANG",
-    "PT.SAROLANGUN PRIMA COAL",
-    "PT.KALTIM PRIMA COAL",
-    "PT.BANYAN KOALINDO LESTARI",
-    "PT.BUDI GEMA GEMPITA",
-    "PT.BERAU COAL",
-    "PT.BELGI ENERGY",
-    "PT.MUARA ALAM SEJAHTERA",
-  ],
-  PTBA: ["PT.BUKIT ASAM"],
-  HE: [
-    "PT.BAHTERA BESTARI SHIPPING",
-    "PT.TENDRI DHARMA SAMUDRA",
-    "PT.BUKIT PRIMA BAHARI",
-    "PT.HANSON ENERGY",
-    "PT.GEMA MUTIARA MARINA",
-    "PT.SEA ASIH LINE",
-    "PT.GORBY PUTRA UTAMA",
-  ],
-  KII: ["PT.KASIH INDUSTRI INDONESIA"],
-  "PLNBB LRC": [
-    "PT.USAHA MAJU MAKMUR",
-    "PT.BELGI ENERGY",
-    "PT.SAROLANGUN PRIMA COAL",
-    "PT.BUDI GEMA GEMPITA",
-    "PT.SINARBARU WIJAYA PERKASA",
-    "PT.TANJUNG RAYA SENTOSA",
-    "PT.TIGA DAYA ENERGI",
-    "PT.BUANA PERKASA SUKSES",
-    "PT.KASIH COAL RESOURCES",
-    "PT.BARATABANG",
-  ],
-  "PLNBB MRC": [
-    "PT.KALTIM PRIMA COAL",
-    "PT.BUDI GEMA GEMPITA",
-    "PT.USAHA MAJU MAKMUR",
-    "PT.BANYAN KOALINDO LESTARI",
-    "PT.TRITUNGGAL BARA SEJATI",
-    "PT.GEMA MUTIARA MARINA",
-    "PT.BUANA PERKASA SUKSES",
-    "PT.SINARBARU WIJAYA PERKASA",
-  ],
-  "TIE MRC": [
-    "PT.TENDRI DHARMA SAMUDRA",
-    "PT.LAUTAN JAYA MANGGALA",
-    "PT.GEMA MUTIARA MARINA",
-    "PT.SUKSES WAHANA MARITIM",
-    "PT.BUANA LINTAS LAUTAN",
-    "PT.WISTARA INTERNASIONAL",
-    "PT.TITAN INFRA ENERGY",
-  ],
-  "TIE LRC": [
-    "PT.GEMA MUTIARA MARINA",
-    "PT.TENDRI DHARMA SAMUDRA",
-    "PT.LAUTAN JAYA MANGGALA",
-    "PT.SUKSES WAHANA MARITIM",
-    "PT.BUANA LINTAS LAUTAN",
-    "PT.WISTARA INTERNASIONAL",
-    "PT.TITAN INFRA ENERGY",
-  ],
-  GEL: ["PT.GLOBAL ENERGI LESTARI", "PT.WISTARA INTERNASIONAL"],
-  IGN: ["PT.INTI GARDA NUSANTARA"],
-  NLN: ["PT.NUKKUWATU LINTAS NUSANTARA"],
-  SESM: ["PT.SUMBER ENERGI SUKSES MAKMUR"],
-  TBC: ["PT.TRUNGTUM BEBATUAN CEMERLANG", "PT.TRITUNGGAL BARA SEJATI"],
-  SPC: ["PT.SAROLANGUN PRIMA COAL"],
-  MME: ["PT.MENAMBANG MUARA ENIM"],
-  MIP: ["PT.MUSTIKA INDAH PERMAI"],
-  MANDIRI: ["PT.MANDIRI INTI PERKASA"],
-  BSR: ["PT.BARA SELARAS RESOURCES"],
-  BGG: ["PT.BUDI GEMA GEMPITA"],
-  BP: ["PT.BANJARSARI PRIBUMI"],
-  AI: ["PT.ARUTMIN INDONESIA"],
-  ARA: ["PT.ANUGERAH RAHAYU ADIPERKASA"],
-  KJA: ["PT.KIDECO JAYA AGUNG"],
-  TBR: ["PT.TANAH BAMBU RESOURCES"],
-  "PLNBB NIAGA": [
-    "PT.ANTANG GUNUNG MERATUS",
-    "PT.TIWA ABADI",
-    "PT.BARATABANG",
-    "PT.JOHNLIN GROUP",
-  ],
-  SDJ: ["PT.SUNGAI DANAU JAYA"],
-  "DP ": ["PT.DIZAMATRA POWERINDO"],
-  BEK: ["PT.BHARINTO EKATAMA"],
-  SPE: ["PT.SUMBER PANCA ENERGI"],
-};
+// let sumber_t = {
+//   TIE: [
+//     "PT.FIRMAN KETAUN",
+//     "PT.TENDRI DHARMA SAMUDRA",
+//     "PT.BARA ANUGERAH SEJAHTERA",
+//     "PT.GLOBAL ANTAR NUSANTARA LINES",
+//     "PT.SAMUDRA SARANA FLORESMA",
+//     "PT.GEMA MUTIARA MARINA",
+//     "PT.BUMI CENDANA ABADI",
+//     "PT.SEA ASIH LINE",
+//     "PT.SWADAYA WIRA MARITIM",
+//     "PT.LAUTAN JATA MANGGALA",
+//     "PT.BAHARI SANDI PRATAMA",
+//     "PT.LAUTAN JAYA MANGGALA",
+//   ],
+//   ADARO: ["PT.ADARO INDONESIA"],
+//   PLNBB: [
+//     "PT.BASKARA SINAR SAKTI",
+//     "PT.USAHA MAJU MAKMUR",
+//     "PT.SUMBER REZEKI SAMUDRA JAYA",
+//     "PT.PLN BATUBARA",
+//     "PT.KREASI ENERGI ALAM",
+//     "PT.ARUTMIN INDONESIA",
+//     "PT.BUMI CENDANA ABADI",
+//     "PT.TENDRI DHARMA SAMUDRA",
+//     "PT.TIGA DAYA ENERGI",
+//     "PT.BORNEO INDOBARA",
+//     "PT.SWADAYA WIRA MARITIM",
+//     "PT.BARATABANG",
+//     "PT.SAROLANGUN PRIMA COAL",
+//     "PT.KALTIM PRIMA COAL",
+//     "PT.BANYAN KOALINDO LESTARI",
+//     "PT.BUDI GEMA GEMPITA",
+//     "PT.BERAU COAL",
+//     "PT.BELGI ENERGY",
+//     "PT.MUARA ALAM SEJAHTERA",
+//   ],
+//   PTBA: ["PT.BUKIT ASAM"],
+//   HE: [
+//     "PT.BAHTERA BESTARI SHIPPING",
+//     "PT.TENDRI DHARMA SAMUDRA",
+//     "PT.BUKIT PRIMA BAHARI",
+//     "PT.HANSON ENERGY",
+//     "PT.GEMA MUTIARA MARINA",
+//     "PT.SEA ASIH LINE",
+//     "PT.GORBY PUTRA UTAMA",
+//   ],
+//   KII: ["PT.KASIH INDUSTRI INDONESIA"],
+//   "PLNBB LRC": [
+//     "PT.USAHA MAJU MAKMUR",
+//     "PT.BELGI ENERGY",
+//     "PT.SAROLANGUN PRIMA COAL",
+//     "PT.BUDI GEMA GEMPITA",
+//     "PT.SINARBARU WIJAYA PERKASA",
+//     "PT.TANJUNG RAYA SENTOSA",
+//     "PT.TIGA DAYA ENERGI",
+//     "PT.BUANA PERKASA SUKSES",
+//     "PT.KASIH COAL RESOURCES",
+//     "PT.BARATABANG",
+//   ],
+//   "PLNBB MRC": [
+//     "PT.KALTIM PRIMA COAL",
+//     "PT.BUDI GEMA GEMPITA",
+//     "PT.USAHA MAJU MAKMUR",
+//     "PT.BANYAN KOALINDO LESTARI",
+//     "PT.TRITUNGGAL BARA SEJATI",
+//     "PT.GEMA MUTIARA MARINA",
+//     "PT.BUANA PERKASA SUKSES",
+//     "PT.SINARBARU WIJAYA PERKASA",
+//   ],
+//   "TIE MRC": [
+//     "PT.TENDRI DHARMA SAMUDRA",
+//     "PT.LAUTAN JAYA MANGGALA",
+//     "PT.GEMA MUTIARA MARINA",
+//     "PT.SUKSES WAHANA MARITIM",
+//     "PT.BUANA LINTAS LAUTAN",
+//     "PT.WISTARA INTERNASIONAL",
+//     "PT.TITAN INFRA ENERGY",
+//   ],
+//   "TIE LRC": [
+//     "PT.GEMA MUTIARA MARINA",
+//     "PT.TENDRI DHARMA SAMUDRA",
+//     "PT.LAUTAN JAYA MANGGALA",
+//     "PT.SUKSES WAHANA MARITIM",
+//     "PT.BUANA LINTAS LAUTAN",
+//     "PT.WISTARA INTERNASIONAL",
+//     "PT.TITAN INFRA ENERGY",
+//   ],
+//   GEL: ["PT.GLOBAL ENERGI LESTARI", "PT.WISTARA INTERNASIONAL"],
+//   IGN: ["PT.INTI GARDA NUSANTARA"],
+//   NLN: ["PT.NUKKUWATU LINTAS NUSANTARA"],
+//   SESM: ["PT.SUMBER ENERGI SUKSES MAKMUR"],
+//   TBC: ["PT.TRUNGTUM BEBATUAN CEMERLANG", "PT.TRITUNGGAL BARA SEJATI"],
+//   SPC: ["PT.SAROLANGUN PRIMA COAL"],
+//   MME: ["PT.MENAMBANG MUARA ENIM"],
+//   MIP: ["PT.MUSTIKA INDAH PERMAI"],
+//   MANDIRI: ["PT.MANDIRI INTI PERKASA"],
+//   BSR: ["PT.BARA SELARAS RESOURCES"],
+//   BGG: ["PT.BUDI GEMA GEMPITA"],
+//   BP: ["PT.BANJARSARI PRIBUMI"],
+//   AI: ["PT.ARUTMIN INDONESIA"],
+//   ARA: ["PT.ANUGERAH RAHAYU ADIPERKASA"],
+//   KJA: ["PT.KIDECO JAYA AGUNG"],
+//   TBR: ["PT.TANAH BAMBU RESOURCES"],
+//   "PLNBB NIAGA": [
+//     "PT.ANTANG GUNUNG MERATUS",
+//     "PT.TIWA ABADI",
+//     "PT.BARATABANG",
+//     "PT.JOHNLIN GROUP",
+//   ],
+//   SDJ: ["PT.SUNGAI DANAU JAYA"],
+//   "DP ": ["PT.DIZAMATRA POWERINDO"],
+//   BEK: ["PT.BHARINTO EKATAMA"],
+//   SPE: ["PT.SUMBER PANCA ENERGI"],
+// };
 let targetSelect = document.getElementById("target");
 daftar_target.forEach((data) => {
   let option = document.createElement("option");
@@ -154,32 +202,27 @@ daftar_target.forEach((data) => {
   option.text = data; // Set teks yang akan ditampilkan dalam option
   targetSelect.appendChild(option); // Tambahkan option ke dalam select
 });
-let supplierSelect = document.getElementById("supplier");
-for (supplier in sumber_t) {
-  let option = document.createElement("option");
-  option.value = supplier; // Set nilai option sesuai dengan target
-  option.text = supplier; // Set teks yang akan ditampilkan dalam option
-  supplierSelect.appendChild(option); // Tambahkan option ke dalam select
-}
+// let supplierSelect = document.getElementById("supplier");
+// for (supplier in sumber_t) {
+//   let option = document.createElement("option");
+//   option.value = supplier; // Set nilai option sesuai dengan target
+//   option.text = supplier; // Set teks yang akan ditampilkan dalam option
+//   supplierSelect.appendChild(option); // Tambahkan option ke dalam select
+// }
 function chooseTarget(e) {
   document.getElementById("target_info").innerText = e;
   document.getElementById("target_prediction").innerText =
     e + " " + "prediction";
 }
+
 let tambangSelect = document.getElementById("tambang");
-function supplierChange(e) {
-  let list_tambang = "";
-  sumber_t[e].forEach((tambang) => {
-    list_tambang += "<option value=" + tambang + ">" + tambang + "</option>";
-    tambangSelect.innerHTML = list_tambang;
-  });
-}
 function unhiddenValidation(name) {
   let validation = document.getElementById("validation-" + name);
   validation.classList.remove("d-none");
 }
+
 async function prediction() {
-  let url = "http://34.87.13.2/gcv-predict";
+  let url = "http://127.0.0.1:5000/gcv-predict";
   let resultTable = document.getElementById("result");
   let target = document.getElementById("target").value;
   let sumber = document.getElementById("tambang").value;
@@ -190,6 +233,10 @@ async function prediction() {
   let gcv_predict = 0;
   let score = 0;
   let tipe_score = "";
+  let split_sumber = sumber.split("+");
+  sumber = split_sumber[1];
+  let split_supplier = supplier.split("+");
+  supplier = split_supplier[1];
   if (target == "00") {
     unhiddenValidation("target");
   }

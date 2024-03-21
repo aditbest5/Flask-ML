@@ -298,10 +298,11 @@ ALTER TABLE `tbl_suppliers`
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_coal_yard`
+-- AUTO_INCREMENT for table `tbl_coal_yard`
 --
 ALTER TABLE `tbl_coal_yard`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
@@ -322,14 +323,20 @@ ALTER TABLE `tbl_suppliers`
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
---
 -- Ketidakleluasaan untuk tabel `tbl_coal_yard`
+-- Constraints for dumped tables
 --
-ALTER TABLE `tbl_coal_yard`
-  ADD CONSTRAINT `fk_supplier_sumber_tambang` FOREIGN KEY (`id_sumber_tambang`) REFERENCES `tbl_sumber_tambang` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `tbl_sumber_tambang`
+-- Constraints for table `tbl_history`
+--
+ALTER TABLE `tbl_history`
+  ADD CONSTRAINT `fk_supplier1_id` FOREIGN KEY (`id_supplier1`) REFERENCES `tbl_suppliers` (`id`),
+  ADD CONSTRAINT `fk_supplier2_id` FOREIGN KEY (`id_supplier2`) REFERENCES `tbl_suppliers` (`id`);
+
+--
+-- Constraints for table `tbl_sumber_tambang`
 --
 ALTER TABLE `tbl_sumber_tambang`
   ADD CONSTRAINT `fk_sumber_tambang_supplier` FOREIGN KEY (`id_supplier`) REFERENCES `tbl_suppliers` (`id`);
