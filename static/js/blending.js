@@ -42,7 +42,6 @@ async function blendCalories() {
       const coalYardData = await fetch(
         "http://127.0.0.1:5000/get-coal-yard"
       ).then((response) => response.json());
-
       // Target kalori yang ingin dicapai
       let target_kalori = document.getElementById("target_kalori").value;
       // Simpan pasangan COAL_YARD yang mendekati target kalori
@@ -103,9 +102,23 @@ async function blendCalories() {
         if (found) {
           id_tambangA = selectedCoalYard.sumberTambangA.id_sumber_tambang;
           id_tambangB = selectedCoalYard.sumberTambangB.id_sumber_tambang;
+          // Membuat objek Date yang merepresentasikan waktu saat ini
+          let today = new Date();
+
+          // Mendapatkan tanggal
+          let date = today.getDate();
+
+          // Mendapatkan bulan (dimulai dari 0 untuk Januari)
+          let month = today.getMonth() + 1; // Ditambah 1 karena bulan dimulai dari 0
+
+          // Mendapatkan tahun
+          let year = today.getFullYear();
+          let now = `${year}-${month}-${date}`;
+          console.log(now);
           const supplierData = await fetch(
             `http://127.0.0.1:5000/get-supplier-by-id/${id_tambangA}&${id_tambangB}`
           ).then((response) => response.json());
+          console.log(supplierData);
           document.getElementById("pemasok1").value = supplierData[0].Suppliers;
           document.getElementById("pemasok2").value = supplierData[1].Suppliers;
           document.getElementById("kalori1").value = kaloriA;
@@ -128,19 +141,22 @@ async function blendCalories() {
               volumeB: volumeB,
               kaloriA: kaloriA,
               kaloriB: kaloriB,
-              id_tambangA: id_tambangA,
-              id_tambangB: id_tambangB,
+              id_supplierA: `${supplierData[0].id_supplier}`,
+              id_supplierB: `${supplierData[1].id_supplier}`,
               kaloriBio: kaloriBio,
               volumeBio: volumeBio,
               nama_operator: nama_operator,
               target_kalori: selectedCoalYard.targetKalori,
+              date: now,
             }),
           })
             .then((response) => response.json())
             .then((data) => {
               console.log(data);
             })
-            .catch((err) => console.log(err.message));
+            .catch((err) => {
+              console.log(err.message);
+            });
           break;
         }
       }

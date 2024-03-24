@@ -106,23 +106,26 @@ def post_blending_result(data):
         volumeB = data.get('volumeB')
         kaloriA = data.get('kaloriA')
         kaloriB = data.get('kaloriB')
-        id_tambangA = data.get('id_tambangA')
-        id_tambangB = data.get('id_tambangB')
+        id_supplier1 = data.get('id_supplierA')
+        id_supplier2 = data.get('id_supplierB')
         kaloriBio = data.get('kaloriBio')
         volumeBio = data.get('volumeBio')
         nama_operator = data.get('nama_operator')
         target_kalori = data.get('target_kalori')
+        created_date = data.get('date')
         body = {
             "supplier1_volume":int(volumeA),
             "supplier2_volume":int(volumeB),
             "supplier1_calorie":int(kaloriA),
             "supplier2_calorie":int(kaloriB),
-            "id_supplier1":int(id_tambangA),
-            "id_supplier2":int(id_tambangB),
+            "id_supplier1":int(id_supplier1),
+            "id_supplier2":int(id_supplier2),
             "biomass_volume":int(volumeBio),
             "biomass_calorie":int(kaloriBio),
             "operator":nama_operator,
-            "target_kalori":float(target_kalori)}
+            "target_kalori":float(target_kalori),
+            "created_date": datetime.strptime(created_date, '%Y-%m-%d')
+            }
         session.add(History(**body))
         session.commit()
         return {'success': True, 'message': 'Data berhasil disimpan ke dalam tabel history'}
