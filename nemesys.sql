@@ -272,6 +272,102 @@ INSERT INTO `tbl_suppliers` (`id`, `Suppliers`) VALUES
 (30, 'TIE LRC'),
 (31, 'TIE MRC');
 
+CREATE TABLE `tbl_coal_yard` (
+  `id` int(11) NOT NULL,
+  `OUTBAR_ID` varchar(14) DEFAULT NULL,
+  `ORG_ID_SUPPLIER` varchar(8) DEFAULT NULL,
+  `id_sumber_tambang` int(19) DEFAULT NULL,
+  `VESSEL_ID` varchar(7) DEFAULT NULL,
+  `VESSEL` varchar(23) DEFAULT NULL,
+  `CALORIE_ID` int(4) DEFAULT NULL,
+  `CALORIE` int(4) DEFAULT NULL,
+  `VOLUME` varchar(16) DEFAULT NULL,
+  `TA` varchar(16) DEFAULT NULL,
+  `CALORIE_LAB` int(4) DEFAULT NULL,
+  `ORG_ID` varchar(5) DEFAULT NULL,
+  `ORG_CODE` varchar(3) DEFAULT NULL,
+  `BRAND_NAME` varchar(13) DEFAULT NULL,
+  `STATUS` varchar(8) DEFAULT NULL,
+  `VOLUME_LOAD` varchar(16) DEFAULT NULL,
+  `AREA_ID` varchar(7) DEFAULT NULL,
+  `AREA` varchar(11) DEFAULT NULL,
+  `LOC_ID` varchar(7) DEFAULT NULL,
+  `LOCATION` varchar(3) DEFAULT NULL,
+  `LAYER_ID` varchar(7) DEFAULT NULL,
+  `LAYER` varchar(2) DEFAULT NULL,
+  `LOAD_DATE` varchar(10) DEFAULT NULL,
+  `LAMA_HARI` decimal(4,1) DEFAULT NULL,
+  `GRP` varchar(42) DEFAULT NULL,
+  `RECLAIM_DATE` varchar(10) DEFAULT NULL,
+  `FLOWRATE` varchar(10) DEFAULT NULL,
+  `DURATION` varchar(10) DEFAULT NULL,
+  `STACKING_ID` varchar(16) DEFAULT NULL,
+  `URUT` int(1) DEFAULT NULL,
+  `VOLUME_SISA_RECLAIM` varchar(16) DEFAULT NULL,
+  `VOLUME_RECLAIM` varchar(16) DEFAULT NULL,
+  `RECLAIM_ID` int(1) DEFAULT NULL,
+  `OUTBAR_DATE` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_coal_yard_sumber_tambang` FOREIGN KEY (`id_sumber_tambang`) REFERENCES `tbl_sumber_tambang` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_coal_yard`
+--
+
+INSERT INTO `tbl_coal_yard` (`id`, `OUTBAR_ID`, `ORG_ID_SUPPLIER`, `id_sumber_tambang`, `VESSEL_ID`, `VESSEL`, `CALORIE_ID`, `CALORIE`, `VOLUME`, `TA`, `CALORIE_LAB`, `ORG_ID`, `ORG_CODE`, `BRAND_NAME`, `STATUS`, `VOLUME_LOAD`, `AREA_ID`, `AREA`, `LOC_ID`, `LOCATION`, `LAYER_ID`, `LAYER`, `LOAD_DATE`, `LAMA_HARI`, `GRP`, `RECLAIM_DATE`, `FLOWRATE`, `DURATION`, `STACKING_ID`, `URUT`, `VOLUME_SISA_RECLAIM`, `VOLUME_RECLAIM`, `RECLAIM_ID`, `OUTBAR_DATE`) VALUES
+(1, 'OB202308031509', 'XVEN3647', 32, 'VSL0897', 'MV. Adhiguna Tarahan', 4800, 4800, '      10,207.000', '7/16/2023 7:12', 4701, '24SRY', 'SRY', 'PLTU SURALAYA', 'STACKING', '       5,011.000', 'ARA0183', 'Coal Yard A', 'LOC0186', 'A1', 'LYR0231', 'L1', '8/3/2023', 113.4, 'Coal Yard A - A1 - (       5,011.000) Ton', '', '', '', 'STCK202308031510', 1, '', '', 0, '7/17/2023'),
+(2, 'OB202308031511', 'XVEN3647', 32, 'VSL0897', 'MV. Adhiguna Tarahan', 4800, 4800, '      10,207.000', '8/3/2023 7:12', 4701, '24SRY', 'SRY', 'PLTU SURALAYA', 'STACKING', '       3,685.000', 'ARA0183', 'Coal Yard A', 'LOC0187', 'A2', 'LYR0233', 'L2', '8/3/2023', 113.4, 'Coal Yard A - A2 - (       3,685.000) Ton', '', '', '', 'STCK202308031515', 2, '', '', 0, '8/3/2023'),
+(3, 'OB202311132182', '20BAS', 32, 'VSL1347', 'BG. Cakrawala VI 2022', 4634, 4634, '      10,103.000', '11/9/2023 10:15', 4634, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,542.000', 'ARA0002', 'Coal Yard A', 'LOC0005', 'X5', 'LYR0034', 'L1', '11/12/2023', 12.4, 'Coal Yard A - X5 - (      10,519.000) Ton', '', '', '', 'STCK202310312128', 1, '       4,125.000', '       2,417.000', 0, '11/11/2023'),
+(4, 'OB202311202224', '20BAS', 32, 'VSL0162', 'BG. KAPUAS JAYA 331', 5011, 5011, '      10,025.000', '11/17/2023 16:00', 4604, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,032.000', 'ARA0002', 'Coal Yard A', 'LOC0005', 'X5', 'LYR0007', '', '11/18/2023', 6.4, 'Coal Yard A - X5 - (      10,519.000) Ton', '', '', '', 'STCK202311172207', 2, '', '', 0, '11/18/2023'),
+(5, 'OB202311222240', '20BAS', 32, 'VSL0611', 'SPB. BRAVO MARINE', 4912, 4912, '      13,047.000', '11/20/2023 14:15', 4775, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       1,462.000', 'ARA0002', 'Coal Yard A', 'LOC0005', 'X5', 'LYR0008', 'L3', '11/21/2023', 3.4, 'Coal Yard A - X5 - (      10,519.000) Ton', '', '', '', 'STCK202311222248', 3, '362,000', '       1,100.000', 0, '11/21/2023'),
+(6, 'OB202209060147', '20BAS', 32, 'VSL0160', 'BG. KAPUAS JAYA 3118', 4650, 4650, '      10,612.000', '7/21/2022 0:00', 4650, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,250.000', 'ARA0002', 'Coal Yard A', 'LOC0021', 'X6', 'LYR0036', 'L1', '7/21/2022', 491.4, 'Coal Yard A - X6 - (      11,415.000) Ton', '', '', '', 'STCK202209060148', 1, '       1,500.000', '       4,750.000', 0, '7/21/2022'),
+(7, 'OB202311152194', '20ADR', 1, 'VSL1003', 'BG. MAX 9003', 4492, 4492, '       9,308.000', '11/13/2023 12:00', 4702, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       1,792.000', 'ARA0002', 'Coal Yard A', 'LOC0022', 'Y10', 'LYR0041', 'L2', '11/14/2023', 10.4, 'Coal Yard A - Y10 - (       3,809.000) Ton', '', '', '', 'STCK202311062152', 2, '', '', 0, '11/14/2023'),
+(8, 'OB202310302112', '20BAS', 32, 'VSL1303', 'BG Nusantara 3009', 4904, 4904, '       7,644.000', '10/29/2023 4:00', 4566, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,250.000', 'ARA0002', 'Coal Yard A', 'LOC0023', 'Y11', 'LYR0044', 'L1', '10/29/2023', 26.4, 'Coal Yard A - Y11 - (      24,426.000) Ton', '', '', '', 'STCK202310232066', 1, '', '', 0, '10/29/2023'),
+(9, 'OB202310302119', '20BAS', 32, 'VSL0226', 'SPB. Premium Bahari', 4907, 4907, '      10,049.000', '10/29/2023 13:00', 4771, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,250.000', 'ARA0002', 'Coal Yard A', 'LOC0023', 'Y11', 'LYR0045', 'L2', '', 25.4, 'Coal Yard A - Y11 - (      24,426.000) Ton', '', '', '', 'STCK202310302114', 2, '       4,209.000', '       2,041.000', 0, '10/30/2023'),
+(10, 'OB202311222249', '20BAS', 32, 'VSL1346', 'BG. Cakrawala VIII 2022', 4904, 4904, '      10,066.000', '11/20/2023 16:30', 4589, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '      11,492.000', 'ARA0002', 'Coal Yard A', 'LOC0023', 'Y11', 'LYR0047', 'L4', '11/22/2023', 2.4, 'Coal Yard A - Y11 - (      24,426.000) Ton', '', '', '', 'STCK202311062158', 4, '       3,509.000', '       3,775.000', 0, '11/21/2023'),
+(11, 'OB202308221647', '20ADR', 1, 'VSL1003', 'BG. MAX 9003', 4196, 4196, '       9,428.000', '8/16/2023 6:00', 4158, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,550.000', 'ARA0002', 'Coal Yard A', 'LOC0024', 'Y12', 'LYR0048', 'L1', '8/21/2023', 95.4, 'Coal Yard A - Y12 - (      10,993.000) Ton', '', '', '', 'STCK202308181617', 1, '       2,476.000', '       4,074.000', 0, '8/21/2023'),
+(12, 'OB202310092002', '20BAS', 32, 'VSL0240', 'SPB Titan 70', 4902, 4902, '      10,014.000', '10/7/2023 22:30', 4768, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,650.000', 'ARA0003', 'Coal Yard B', 'LOC0025', 'X2', 'LYR0055', 'L1', '10/9/2023', 46.4, 'Coal Yard B - X2 - (      19,847.000) Ton', '', '', '', 'STCK202309291946', 1, '       1,446.000', '       5,204.000', 0, '10/8/2023'),
+(13, 'OB202311152194', '20ADR', 1, 'VSL1003', 'BG. MAX 9003', 4492, 4492, '       9,308.000', '11/13/2023 12:00', 4702, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,059.000', 'ARA0003', 'Coal Yard B', 'LOC0025', 'X2', 'LYR0057', 'L3', '11/15/2023', 9.4, 'Coal Yard B - X2 - (      19,847.000) Ton', '', '', '', 'STCK202311082164', 3, '', '', 0, '11/14/2023'),
+(14, 'OB202311222249', '20BAS', 32, 'VSL1346', 'BG. Cakrawala VIII 2022', 4904, 4904, '      10,066.000', '11/20/2023 16:30', 4589, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,092.000', 'ARA0003', 'Coal Yard B', 'LOC0025', 'X2', 'LYR0058', 'L4', '11/22/2023', 2.4, 'Coal Yard B - X2 - (      19,847.000) Ton', '', '', '', 'STCK202311222247', 4, '', '', 0, '11/21/2023'),
+(15, 'OB202308221647', '20ADR', 1, 'VSL1003', 'BG. MAX 9003', 4196, 4196, '       9,428.000', '8/16/2023 6:00', 4158, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,058.000', 'ARA0003', 'Coal Yard B', 'LOC0028', 'Y7', 'LYR0059', 'L1', '', 95.4, 'Coal Yard B - Y7 - (       8,733.000) Ton', '', '', '', 'STCK202308081552', 1, '       1,941.000', '       4,117.000', 0, '8/21/2023'),
+(16, 'OB202310041976', '20BAS', 32, 'VSL0226', 'SPB. Premium Bahari', 4901, 4901, '      10,012.000', '10/3/2023 13:00', 4767, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,250.000', 'ARA0003', 'Coal Yard B', 'LOC0029', 'Y9', 'LYR0063', 'L1', '', 52.4, 'Coal Yard B - Y9 - (      12,069.000) Ton', '', '', '', 'STCK202309291933', 1, '       4,442.000', '       1,808.000', 0, '10/3/2023'),
+(17, 'OB202310252087', '20BAS', 32, 'VSL0161', 'BG. KAPUAS JAYA 333', 4909, 4909, '      11,564.000', '10/25/2023 11:00', 4773, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,409.000', 'ARA0003', 'Coal Yard B', 'LOC0029', 'Y9', 'LYR0064', 'L2', '10/25/2023', 30.4, 'Coal Yard B - Y9 - (      12,069.000) Ton', '', '', '', 'STCK202310242081', 2, '       3,060.000', '       3,349.000', 0, '10/25/2023'),
+(18, 'OB202310312126', '20BAS', 32, 'VSL1346', 'BG. Cakrawala VIII 2022', 4902, 4902, '      10,131.000', '10/29/2023 6:00', 4535, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       6,017.000', 'ARA0003', 'Coal Yard B', 'LOC0029', 'Y9', 'LYR0065', 'L3', '10/31/2023', 24.4, 'Coal Yard B - Y9 - (      12,069.000) Ton', '', '', '', 'STCK202310302109', 3, '       3,100.000', '       2,917.000', 0, '10/31/2023'),
+(19, 'OB202311172201', '20BAS', 32, 'VSL0341', 'BG. Kapuas Jaya 333', 4908, 4908, '      11,519.000', '11/14/2023 16:00', 4613, '24PRA', 'PRA', 'UJP PRATU', 'STACKING', '       7,425.000', 'ARA0003', 'Coal Yard B', 'LOC0029', 'Y9', 'LYR0066', 'L4', '11/17/2023', 7.4, 'Coal Yard B - Y9 - (      12,069.000) Ton', '', '', '', 'STCK202311072159', 4, '550,000', '       5,958.000', 0, '11/16/2023'),
+(20, 'OB202308021499', '20ADR', 1, 'VSL0889', 'MV. Arimbi Baruna', 4800, 4800, '      63,000.000', '7/22/2023 11:00', 4647, '24SRY', 'SRY', 'PLTU SURALAYA', 'STACKING', '      25,703.000', 'ARA0185', 'Coal Yard C', 'LOC0227', 'C2', 'LYR0244', 'L1', '8/3/2023', 113.4, 'Coal Yard C - C2 - (      25,703.000) Ton', '', '', '', 'STCK202308031512', 1, '', '', 0, '7/22/2023');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_history`
+--
+
+CREATE TABLE `tbl_history` (
+  `id` int(11) NOT NULL,
+  `supplier1_calorie` varchar(30) NOT NULL,
+  `supplier2_calorie` varchar(30) NOT NULL,
+  `supplier1_volume` int(11) NOT NULL,
+  `supplier2_volume` int(11) NOT NULL,
+  `biomass_calorie` int(11) NOT NULL,
+  `biomass_volume` int(11) NOT NULL,
+  `id_supplier1` int(11) NOT NULL,
+  `id_supplier2` int(11) NOT NULL,
+  `operator` varchar(30) NOT NULL,
+  `target_kalori` float NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_history_supplier1` FOREIGN KEY (`id_supplier1`) REFERENCES `tbl_sumber_tambang` (`id`),
+  CONSTRAINT `fk_history_supplier2` FOREIGN KEY (`id_supplier2`) REFERENCES `tbl_sumber_tambang` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_sumber_tambang`
+--
+
+
+
 --
 -- Indexes for dumped tables
 --
