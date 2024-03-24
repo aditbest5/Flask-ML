@@ -2,10 +2,15 @@ from flask import Flask, jsonify, render_template, Response, request
 import pickle
 import json
 import pandas as pd
+from models.history import *
+from models.database import *
+from models.suppliers import *
+from sqlalchemy.orm import aliased
+
 from sklearn.ensemble import RandomForestClassifier
 import os
 
-
+session = Database();
 def index():
     return render_template('index.html')
 
@@ -123,6 +128,13 @@ def prediction():
                     data_inf[f'{target} Prediction'] = y_pred_inf[0]
     data_json = json.dumps(data)
     return data_json
+
+def explore():
+        # Ambil semua data dari tabel History
+    supplier1 = aliased(Suppliers)
+    supplier2 = aliased(Suppliers)
+    data_history = session.query(History, supplier1, supplier2).join(supplier1, History.id_supplier1 == supplier1.id).join(supplier2, History.id_supplier2 == supplier2.id).all();
+    return render_template('explore.html', data_history=data_history)
 
 def not_found_error(e):
     return render_template('404NotFound.html'),404

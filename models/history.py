@@ -16,6 +16,7 @@ class History(Base):
     biomass_volume = Column(Integer)
     operator = Column(String)
     target_kalori = Column(Float)
+    created_date = Column(Date)
    # Menambahkan relasi dengan tabel supplier
     supplier1 = relationship("Suppliers", foreign_keys=[id_supplier1])
     supplier2 = relationship("Suppliers", foreign_keys=[id_supplier2])
