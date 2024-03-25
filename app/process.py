@@ -20,6 +20,7 @@ session = Database()
 def all_suppliers():
     search_result = session.query(Suppliers).all()
     suppliers_list = [{"id": supplier.id, "Suppliers": supplier.Suppliers} for supplier in search_result]
+    session.commit()
     return suppliers_list
 
 def get_sumber_by_id(id):
@@ -40,7 +41,8 @@ def get_sumber_by_id(id):
         result_dict = {**sumber_tambang_dict, **supplier_dict}
 
         all_results.append(result_dict)
-
+    
+    session.commit()
     return all_results
 
 def coal_yard_to_dict(coal_yard):
@@ -59,7 +61,7 @@ def get_coal_yard():
     for coal_yard in search_results:
         coal_yard_dict = coal_yard_to_dict(coal_yard)
         all_results.append(coal_yard_dict)
-
+    session.commit()
     return all_results
 
 def get_supplier_by_id(id1, id2):
@@ -97,7 +99,7 @@ def get_supplier_by_id(id1, id2):
         result_dict = {**sumber_tambang_dict, **supplier_dict}
 
         all_results.append(result_dict)
-
+    session.commit()
     return all_results
 
 def post_blending_result(data):

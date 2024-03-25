@@ -134,6 +134,7 @@ def explore():
     supplier1 = aliased(Suppliers)
     supplier2 = aliased(Suppliers)
     data_history = session.query(History, supplier1, supplier2).join(supplier1, History.id_supplier1 == supplier1.id).join(supplier2, History.id_supplier2 == supplier2.id).all();
+    session.commit();
     return render_template('explore.html', data_history=data_history)
 
 def not_found_error(e):
