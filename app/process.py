@@ -8,20 +8,20 @@ from models.history import *
 from datetime import datetime, timedelta
 from dotenv import dotenv_values
 
+## mendefinisikan session dengan konfigurasi Database(
 session = Database()
 
 #setting params
 params = dotenv_values(".env")
 secret_key = str(params.get("SECRET_KEY"))
 algorithm = str(params.get("ALGORITHM"))
+
 try:
-
-    ## mendefinisikan session dengan konfigurasi Database()
-
     ## function untuk menampilkan keseluruhan movie
     def all_suppliers():
         search_result = session.query(Suppliers).all()
         suppliers_list = [{"id": supplier.id, "Suppliers": supplier.Suppliers} for supplier in search_result]
+        session.commit()
         return suppliers_list
 
     def get_sumber_by_id(id):
@@ -41,8 +41,9 @@ try:
 
             result_dict = {**sumber_tambang_dict, **supplier_dict}
 
-            all_results.append(result_dict)
-
+        all_results.append(result_dict)
+    
+        session.commit()
         return all_results
 
     def coal_yard_to_dict(coal_yard):
@@ -61,7 +62,7 @@ try:
         for coal_yard in search_results:
             coal_yard_dict = coal_yard_to_dict(coal_yard)
             all_results.append(coal_yard_dict)
-
+        session.commit()
         return all_results
 
     def get_supplier_by_id(id1, id2):
@@ -98,8 +99,8 @@ try:
 
             result_dict = {**sumber_tambang_dict, **supplier_dict}
 
-            all_results.append(result_dict)
-
+        all_results.append(result_dict)
+        session.commit()
         return all_results
 
     def post_blending_result(data):
