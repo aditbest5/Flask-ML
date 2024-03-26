@@ -1,44 +1,5 @@
 {% extends "master.html" %} {% block bodyblock %}
-<div class="container-fluid mt-5 w-100">
-  <div class="my-4">
-    <table id="table_history" class="table bg-light">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Supplier 1</th>
-          <th scope="col">Supplier 2</th>
-          <th scope="col">Calorie 1</th>
-          <th scope="col">Calorie 2</th>
-          <th scope="col">Volume 1</th>
-          <th scope="col">Volume 2</th>
-          <th scope="col">Biomass Calorie</th>
-          <th scope="col">Biomass Volume</th>
-          <th scope="col">Operator</th>
-          <th scope="col">Target Calorie</th>
-          <th scope="col">Date Created</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for history in data_history %}
-        <tr>
-          <td>{{ loop.index }}</td>
-          <td>{{ history[1].Suppliers }}</td>
-          <td>{{ history[2].Suppliers }}</td>
-          <td>{{ history[0].supplier1_calorie }}</td>
-          <td>{{ history[0].supplier2_calorie }}</td>
-          <td>{{ history[0].supplier1_volume }}</td>
-          <td>{{ history[0].supplier2_volume }}</td>
-          <td>{{ history[0].biomass_calorie }}</td>
-          <td>{{ history[0].biomass_volume }}</td>
-          <td>{{ history[0].operator }}</td>
-          <td>{{ history[0].target_kalori }}</td>
-          <td>{{ history[0].created_date }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
+<div class="container-fluid mt-5 w-100"></div>
 <script src="{{ url_for('static', filename='js/explore.js') }}"></script>
 
 {% endblock %}
