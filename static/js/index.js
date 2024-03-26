@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function renderSupplier() {
   let supplierSelect = document.getElementById("supplier");
-  await fetch("http://127.0.0.1:5000/get-supplier", {
+  await fetch("http://10.8.11.43/get-supplier", {
     cache: "no-cache",
     credentials: "same-origin",
     headers: { "Content-Type": "application/json" },
@@ -32,7 +32,7 @@ async function supplierChange(e) {
   sumberSelect.innerHTML = "";
   let split_value = e.split("+");
   let id = split_value[0];
-  await fetch(`http://127.0.0.1:5000/get-sumber/${id}`, {
+  await fetch(`http://10.8.11.43/get-sumber/${id}`, {
     cache: "no-cache",
     credentials: "same-origin",
     headers: { "Content-Type": "application/json" },
@@ -222,7 +222,7 @@ function unhiddenValidation(name) {
 }
 
 async function prediction() {
-  let url = "http://127.0.0.1:5000/gcv-predict";
+  let url = "http://10.8.11.43/gcv-predict";
   let resultTable = document.getElementById("result");
   let target = document.getElementById("target").value;
   let sumber = document.getElementById("tambang").value;
