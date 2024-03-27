@@ -1,5 +1,68 @@
 {% extends "master.html" %} {% block bodyblock %}
-<div class="container-fluid mt-5 w-100"></div>
+<div class="container-fluid mt-5 w-75">
+  <div class="card">
+    <h5 class="card-header bg-info">Dataset</h5>
+    <div class="card-body">
+      <div class="table-responsive" style="max-height: 400px">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" class="text-nowrap">Supplier</th>
+              <th scope="col" class="text-nowrap">Sumber Tambang</th>
+              <th scope="col" class="text-nowrap">GCV ARB</th>
+              <th scope="col" class="text-nowrap">TM ARB</th>
+              <th scope="col" class="text-nowrap">Ash Content ARB</th>
+              <th scope="col" class="text-nowrap">Ash Content ADB</th>
+              <th scope="col" class="text-nowrap">IM ADB</th>
+              <th scope="col" class="text-nowrap">IDT (Reducing)</th>
+              <th scope="col" class="text-nowrap">Total Sulphur ARB</th>
+              <th scope="col" class="text-nowrap">Total Sulphur DAFB</th>
+              <th scope="col" class="text-nowrap">SiO2</th>
+              <th scope="col" class="text-nowrap">Al2O3</th>
+              <th scope="col" class="text-nowrap">Fe2O3</th>
+              <th scope="col" class="text-nowrap">Na2O</th>
+              <th scope="col" class="text-nowrap">K2O</th>
+              <th scope="col" class="text-nowrap">TiO2</th>
+              <th scope="col" class="text-nowrap">MnO2</th>
+              <th scope="col" class="text-nowrap">P2O5</th>
+              <th scope="col" class="text-nowrap">Slagging</th>
+              <th scope="col" class="text-nowrap">Fouling</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for sumber_tambang in data_sumber %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ sumber_tambang[1].Suppliers }}</td>
+              <td>{{ sumber_tambang[0].Sumber_Tambang }}</td>
+              <td>{{ sumber_tambang[0].GCV_ARB }}</td>
+              <td>{{ sumber_tambang[0].TM_ARB }}</td>
+              <td>{{ sumber_tambang[0].Ash_Content_ARB }}</td>
+              <td>{{ sumber_tambang[0].Ash_Content_ADB }}</td>
+              <td>{{ sumber_tambang[0].IM_ADB }}</td>
+              <td>{{ sumber_tambang[0].IDT }}</td>
+              <td>{{ sumber_tambang[0].Total_Sulphur_ARB }}</td>
+              <td>{{ sumber_tambang[0].Total_Sulphur_DAFB }}</td>
+              <td>{{ sumber_tambang[0].SiO2 }}</td>
+              <td>{{ sumber_tambang[0].Al2O3 }}</td>
+              <td>{{ sumber_tambang[0].SiO2 }}</td>
+              <td>{{ sumber_tambang[0].Fe2O3 }}</td>
+              <td>{{ sumber_tambang[0].Na2O }}</td>
+              <td>{{ sumber_tambang[0].K2O }}</td>
+              <td>{{ sumber_tambang[0].TiO2 }}</td>
+              <td>{{ sumber_tambang[0].MnO2 }}</td>
+              <td>{{ sumber_tambang[0].P2O5 }}</td>
+              <td>{{ sumber_tambang[0].Slagging }}</td>
+              <td>{{ sumber_tambang[0].Fouling }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="{{ url_for('static', filename='js/explore.js') }}"></script>
 
 {% endblock %}

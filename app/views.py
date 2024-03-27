@@ -5,6 +5,7 @@ import pandas as pd
 from models.history import *
 from models.database import *
 from models.suppliers import *
+from models.sumber_tambang import *
 from sqlalchemy.orm import aliased
 
 from sklearn.ensemble import RandomForestClassifier
@@ -130,15 +131,17 @@ def prediction():
     return data_json
 
 def explore():
-    return render_template('explore.html')
+    data_sumber = session.query(SumberTambang, Suppliers).join(Suppliers, SumberTambang.id_supplier == Suppliers.id).all();
+    session.commit();
+    return render_template('explore.html', data_sumber=data_sumber)
 
 def history():
-        # Ambil semua data dari tabel History
+    # Ambil semua data dari tabel History
     supplier1 = aliased(Suppliers)
     supplier2 = aliased(Suppliers)
     data_history = session.query(History, supplier1, supplier2).join(supplier1, History.id_supplier1 == supplier1.id).join(supplier2, History.id_supplier2 == supplier2.id).all();
     session.commit();
-    return render_template('explore.html', data_history=data_history)
+    return render_template('history.html', data_history=data_history)
 
 def not_found_error(e):
     return render_template('404NotFound.html'),404
