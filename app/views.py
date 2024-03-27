@@ -130,6 +130,9 @@ def prediction():
     return data_json
 
 def explore():
+    return render_template('explore.html')
+
+def history():
         # Ambil semua data dari tabel History
     supplier1 = aliased(Suppliers)
     supplier2 = aliased(Suppliers)
