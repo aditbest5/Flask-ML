@@ -7,13 +7,13 @@ pipeline{
     stages{
         stage('Build'){
             steps{
-                sh 'sudo docker build -t aditbest5/flask-ml .'
+                sh 'docker build -t aditbest5/flask-ml .'
             }
         }
         stage('Deliver'){
             steps {
-                sh 'sudo docker container rm --force flask-ml-container'
-                sh 'sudo docker run --name flask-ml-container -p  3000:3000 aditbest5/flask-ml &'
+                sh 'docker container rm --force flask-ml-container'
+                sh 'docker run --name flask-ml-container -p  3000:3000 aditbest5/flask-ml &'
             }
         }
     }
