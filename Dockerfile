@@ -10,4 +10,4 @@ RUN pip3 install -r requirements.txt
 #RUN apt-get update
 #Run command in container
 EXPOSE 3000
-CMD ["python3", "main.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:3000", "main:main"]
