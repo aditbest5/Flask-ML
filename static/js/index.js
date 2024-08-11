@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function renderSupplier() {
   let supplierSelect = document.getElementById("supplier");
-  await fetch("http://10.8.11.43/get-supplier", {
+  await fetch("https://indonesiapower.project-adit.my.id/get-supplier", {
     cache: "no-cache",
     credentials: "same-origin",
     headers: { "Content-Type": "application/json" },
@@ -32,7 +32,7 @@ async function supplierChange(e) {
   sumberSelect.innerHTML = "";
   let split_value = e.split("+");
   let id = split_value[0];
-  await fetch(`http://10.8.11.43/get-sumber/${id}`, {
+  await fetch(`https://indonesiapower.project-adit.my.id/get-sumber/${id}`, {
     cache: "no-cache",
     credentials: "same-origin",
     headers: { "Content-Type": "application/json" },
@@ -222,7 +222,7 @@ function unhiddenValidation(name) {
 }
 
 async function prediction() {
-  let url = "http://10.8.11.43/gcv-predict";
+  let url = "https://indonesiapower.project-adit.my.id/gcv-predict";
   let resultTable = document.getElementById("result");
   let target = document.getElementById("target").value;
   let sumber = document.getElementById("tambang").value;

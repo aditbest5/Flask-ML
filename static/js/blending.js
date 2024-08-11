@@ -8,7 +8,7 @@ async function renderSupplier() {
   let firstSupplier = document.getElementById("pemasok1");
   let secondSupplier = document.getElementById("pemasok2");
 
-  await fetch("http://10.8.11.43/get-supplier", {
+  await fetch("https://indonesiapower.project-adit.my.id/get-supplier", {
     cache: "no-cache",
     credentials: "same-origin",
     headers: { "Content-Type": "application/json" },
@@ -39,9 +39,9 @@ async function blendCalories() {
   let nama_operator = document.getElementById("operator").value;
   if (nama_operator) {
     try {
-      const coalYardData = await fetch("http://10.8.11.43/get-coal-yard").then(
-        (response) => response.json()
-      );
+      const coalYardData = await fetch(
+        "https://indonesiapower.project-adit.my.id/get-coal-yard"
+      ).then((response) => response.json());
       // Target kalori yang ingin dicapai
       let target_kalori = document.getElementById("target_kalori").value;
       // Simpan pasangan COAL_YARD yang mendekati target kalori
@@ -116,7 +116,7 @@ async function blendCalories() {
           let now = `${year}-${month}-${date}`;
           console.log(now);
           const supplierData = await fetch(
-            `http://10.8.11.43/get-supplier-by-id/${id_tambangA}&${id_tambangB}`
+            `https://indonesiapower.project-adit.my.id/get-supplier-by-id/${id_tambangA}&${id_tambangB}`
           ).then((response) => response.json());
           console.log(supplierData);
           document.getElementById("pemasok1").value = supplierData[0].Suppliers;
@@ -131,25 +131,28 @@ async function blendCalories() {
           document.getElementById("nama_operator").value = nama_operator;
           document.getElementById("total_kuantitas").value =
             selectedCoalYard.totalVolume;
-          await fetch("http://10.8.11.43/store-history", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              volumeA: volumeA,
-              volumeB: volumeB,
-              kaloriA: kaloriA,
-              kaloriB: kaloriB,
-              id_supplierA: `${supplierData[0].id_supplier}`,
-              id_supplierB: `${supplierData[1].id_supplier}`,
-              kaloriBio: kaloriBio,
-              volumeBio: volumeBio,
-              nama_operator: nama_operator,
-              target_kalori: selectedCoalYard.targetKalori,
-              date: now,
-            }),
-          })
+          await fetch(
+            "https://indonesiapower.project-adit.my.id/store-history",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                volumeA: volumeA,
+                volumeB: volumeB,
+                kaloriA: kaloriA,
+                kaloriB: kaloriB,
+                id_supplierA: `${supplierData[0].id_supplier}`,
+                id_supplierB: `${supplierData[1].id_supplier}`,
+                kaloriBio: kaloriBio,
+                volumeBio: volumeBio,
+                nama_operator: nama_operator,
+                target_kalori: selectedCoalYard.targetKalori,
+                date: now,
+              }),
+            }
+          )
             .then((response) => response.json())
             .then((data) => {
               console.log(data);
