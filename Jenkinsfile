@@ -12,7 +12,7 @@ pipeline{
         }
         stage('Deliver'){
             steps {
-                // sh 'docker container rm --force flask-ml-container'
+                sh 'docker container rm --force flask-ml-container'
                 sh 'docker run --name flask-ml-container -p  3000:3000 aditbest5/flask-ml &'
             }
         }
