@@ -17,4 +17,13 @@ pipeline{
             }
         }
     }
+    
+    post {
+        always {
+            // Membersihkan container yang lama atau gagal, jika diperlukan
+            sh 'docker container prune -f || true'
+            sh 'docker image prune -f || true'
+
+        }
+    }
 }
