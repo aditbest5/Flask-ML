@@ -7,7 +7,7 @@ COPY . /app
 COPY requirements.txt requirements.txt
 #Run this command in the container
 RUN pip3 install -r requirements.txt
-RUN apt-get update
+#RUN apt-get update
 #Run command in container
-EXPOSE 5000
+EXPOSE 3000
 CMD ["python3", "main.py"]
