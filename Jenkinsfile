@@ -20,7 +20,7 @@ pipeline{
      post {
         always {
             // Membersihkan image yang lama atau gagal, jika diperlukan
-            sh 'docker container prune -f || true'
+            // sh 'docker container prune -f || true'
             sh 'docker image prune -f || true'
 
         }
